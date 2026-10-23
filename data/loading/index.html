@@ -489,6 +489,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#older-loaders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Older loaders
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -869,6 +880,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#older-loaders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Older loaders
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1120,6 +1142,49 @@ and ID map problems.</p>
 </code></pre></div>
 <p>It also returns the problems as a list (empty when everything is fine), so a
 script can fail on them. Run it after editing the catalog or moving data.</p>
+<h2 id="older-loaders">Older loaders<a class="headerlink" href="#older-loaders" title="Permanent link">&para;</a></h2>
+<p>The functions in <code>c4.metadata</code> from before the catalog still work, so existing
+notebooks and scripts don't break. They take the same arguments and return
+exactly what they always did: the file as stored, without <code>patient_id</code> or
+<code>qc_note</code>, and without leaving out <code>drop=1</code> patients. Only where the files are
+found has changed: they now come from the catalog too.</p>
+<table>
+<thead>
+<tr>
+<th>Older call</th>
+<th>New equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>load_pheno("&lt;name&gt;")</code></td>
+<td><code>cohort("&lt;cohort&gt;").load("pheno")</code></td>
+</tr>
+<tr>
+<td><code>load_pcs("&lt;name&gt;")</code></td>
+<td><code>cohort("&lt;cohort&gt;").load("pcs")</code></td>
+</tr>
+<tr>
+<td><code>load_hla("&lt;name&gt;", caller="hlahd")</code></td>
+<td><code>cohort("&lt;cohort&gt;").load("hla.hlahd")</code></td>
+</tr>
+<tr>
+<td><code>load_hla("&lt;name&gt;", panel="african")</code> (HIBAG)</td>
+<td><code>cohort("&lt;cohort&gt;").load("hla.hibag.raw", panel="african")</code></td>
+</tr>
+<tr>
+<td><code>load_pheno("&lt;name&gt;", df=pcs, left_ID=..., right_ID="IID", how="inner")</code></td>
+<td><code>cohort("&lt;cohort&gt;").load("pheno", "pcs", how="inner")</code></td>
+</tr>
+<tr>
+<td><code>load_qc("&lt;name&gt;")</code></td>
+<td><code>cohort("&lt;cohort&gt;").id_map()</code></td>
+</tr>
+</tbody>
+</table>
+<p>The table in <code>c4/metadata.py</code> lists which old names map to which cohort and
+catalog entry.</p>
+<p>Use <code>cohort()</code> for new code.</p>
 
 
 
