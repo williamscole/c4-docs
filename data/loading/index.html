@@ -634,6 +634,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -648,10 +675,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -669,8 +696,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -723,6 +750,34 @@
     
   
     c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.hla
   
 
     
@@ -991,20 +1046,29 @@ HIBAG calls, for instance, exist for each reference panel. Pass the parameter
 by name:</p>
 <div class="highlight"><pre><span></span><code><span class="n">hibag</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"hla.hibag"</span><span class="p">,</span> <span class="n">panel</span><span class="o">=</span><span class="s2">"african"</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id                qc_note sample.id    A_1    A_2  prob_A
-0       P001                    NaN  ARR-0001  02:01  24:02    0.97
-1       P002                    NaN  ARR-0002  01:01  03:01    0.99
-2       P003  old exome_id: EX-0003  ARR-0003  11:01  24:02    0.88
-3       P004  old exome_id: EX-0004  ARR-0004  02:01  02:01    0.95
-4       P007                    NaN  ARR-0007  30:01  33:03    0.71
+<div class="highlight"><pre><span></span><code>  patient_id                qc_note sample.id                A  prob_A
+0       P001                    NaN  ARR-0001  A*02:01/A*24:02    0.97
+1       P002                    NaN  ARR-0002  A*01:01/A*03:01    0.99
+2       P003  old exome_id: EX-0003  ARR-0003  A*11:01/A*24:02    0.88
+3       P004  old exome_id: EX-0004  ARR-0004  A*02:01/A*02:01    0.95
+4       P007                    NaN  ARR-0007  A*30:01/A*33:03    0.71
 </code></pre></div>
 <p>Leave the parameter out and its default is used (<code>european</code> here). An invalid
 value raises an error that lists the valid ones.</p>
 <div class="admonition info">
-<p class="admonition-title">HIBAG columns</p>
-<p>Raw HIBAG output has columns like <code>allele1_A</code> and <code>allele2_A</code>. The HIBAG
-loader renames them to <code>A_1</code> and <code>A_2</code>, the split-allele naming used
-elsewhere in c4. <code>prob_A</code> is kept as is.</p>
+<p class="admonition-title">HLA columns are genotype objects</p>
+<p>Every table under <code>hla:</code> loads with one column per gene holding
+<code>HLAgenotype</code> objects, not text. Raw HIBAG output has <code>allele1_A</code> and
+<code>allele2_A</code>; the HIBAG loader combines them into <code>A</code>, and each genotype's
+<code>.prob</code> is set from <code>prob_A</code> (also kept as a column). The objects print as
+<code>A*02:01/A*24:02</code> and can do more than text can:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gt</span> <span class="o">=</span> <span class="n">hibag</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span>
+<span class="n">gt</span><span class="o">.</span><span class="n">prob</span>                                  <span class="c1"># 0.97</span>
+<span class="n">gt</span><span class="o">.</span><span class="n">copies_of</span><span class="p">(</span><span class="s2">"A*24:02"</span><span class="p">)</span>                  <span class="c1"># 1</span>
+<span class="n">gt</span><span class="o">.</span><span class="n">genotype</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">"standard_no_gene"</span><span class="p">)</span>   <span class="c1"># "02:01/24:02"</span>
+</code></pre></div>
+<p>Patients missing from an HLA table after a merge get <code>NaN</code>, not a
+genotype object.</p>
 </div>
 <h2 id="merge-tables">Merge tables<a class="headerlink" href="#merge-tables" title="Permanent link">&para;</a></h2>
 <p>Give <code>.load()</code> several names and the tables are merged on <code>patient_id</code>:</p>
@@ -1020,14 +1084,14 @@ Left out 1 patient(s) marked drop=1 in the id_map (keep_dropped=True to keep the
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[[</span><span class="s2">"patient_id"</span><span class="p">,</span> <span class="s2">"qc_note"</span><span class="p">,</span> <span class="s2">"OS_mo"</span><span class="p">,</span> <span class="s2">"IID"</span><span class="p">,</span> <span class="s2">"PC1"</span><span class="p">,</span> <span class="s2">"seqID"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]]</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id                qc_note  OS_mo       IID    PC1    seqID              A
-0       P001                    NaN   31.2  ARR-0001  0.012  EX-0001  A*02:01/24:02
-1       P002                    NaN   44.0  ARR-0002  0.010  EX-0002  A*01:01/03:01
-2       P003  old exome_id: EX-0003   12.5  ARR-0003 -0.044  EX-0004  A*11:01/24:02
-3       P004  old exome_id: EX-0004   27.9  ARR-0004  0.009  EX-0003  A*02:01/02:01
-4       P005                    NaN   50.1       NaN    NaN  EX-0005  A*03:01/68:01
-5       P007                    NaN   19.0  ARR-0007 -0.051      NaN            NaN
-6       P008                    NaN   38.6       NaN    NaN      NaN            NaN
+<div class="highlight"><pre><span></span><code>  patient_id                qc_note  OS_mo       IID    PC1    seqID                A
+0       P001                    NaN   31.2  ARR-0001  0.012  EX-0001  A*02:01/A*24:02
+1       P002                    NaN   44.0  ARR-0002  0.010  EX-0002  A*01:01/A*03:01
+2       P003  old exome_id: EX-0003   12.5  ARR-0003 -0.044  EX-0004  A*11:01/A*24:02
+3       P004  old exome_id: EX-0004   27.9  ARR-0004  0.009  EX-0003  A*02:01/A*02:01
+4       P005                    NaN   50.1       NaN    NaN  EX-0005  A*03:01/A*68:01
+5       P007                    NaN   19.0  ARR-0007 -0.051      NaN              NaN
+6       P008                    NaN   38.6       NaN    NaN      NaN              NaN
 </code></pre></div>
 <p>The PCs and HLA calls came from different ID systems (array and exome), but
 both landed on the right patients. Notice that P003 got exome <code>EX-0004</code> and

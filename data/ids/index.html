@@ -573,6 +573,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -587,10 +614,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -608,8 +635,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -662,6 +689,34 @@
     
   
     c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.hla
   
 
     
@@ -923,11 +978,11 @@ from them. Instead the ID map records who each sample really belongs to:</p>
 <p>Anything keyed by exome ID now lands on the right person automatically:</p>
 <div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="s2">"hla.hlahd"</span><span class="p">)[[</span><span class="s2">"patient_id"</span><span class="p">,</span> <span class="s2">"seqID"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]]</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id    seqID              A
-0       P001  EX-0001  A*02:01/24:02
-1       P002  EX-0002  A*01:01/03:01
-2       P003  EX-0004  A*11:01/24:02
-3       P004  EX-0003  A*02:01/02:01
+<div class="highlight"><pre><span></span><code>  patient_id    seqID                A
+0       P001  EX-0001  A*02:01/A*24:02
+1       P002  EX-0002  A*01:01/A*03:01
+2       P003  EX-0004  A*11:01/A*24:02
+3       P004  EX-0003  A*02:01/A*02:01
 ...
 </code></pre></div>
 <p>Fixing a swap, or undoing one later, is a two-line edit to the ID map, which

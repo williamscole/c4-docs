@@ -1,0 +1,1429 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Data loading and analysis tools for the C4 cluster">
+      
+      
+      
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/hla/">
+      
+      
+        <link rel="prev" href="../data/troubleshooting/">
+      
+      
+        <link rel="next" href="../reference/cohort/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>HLA calls - c4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hla-calls" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="c4" class="md-header__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            c4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HLA calls
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="c4" class="md-nav__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    c4
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data loading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data loading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loading and merging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/ids/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How IDs link
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The data catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#load-hla-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load HLA calls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load HLA calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hibag-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIBAG probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-with-a-genotype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work with a genotype
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Work with a genotype">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allele-dosages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allele dosages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-two-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare two callers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-table-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change table layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-to-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save to a file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Command line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c4-split-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 split-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-merge-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 merge-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-hla_concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 hla_concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#load-hla-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load HLA calls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load HLA calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hibag-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIBAG probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-with-a-genotype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work with a genotype
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Work with a genotype">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allele-dosages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Allele dosages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-two-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare two callers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-table-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change table layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-to-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save to a file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Command line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c4-split-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 split-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-merge-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 merge-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-hla_concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4 hla_concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hla-calls">HLA calls<a class="headerlink" href="#hla-calls" title="Permanent link">&para;</a></h1>
+<p>c4 reads HLA typing from HLA-HD, HIBAG and the lab's standardized files. Every
+loader gives you the same thing: one column per gene, holding <code>HLAgenotype</code>
+objects. Each object knows its gene, its two alleles and its resolution. It can
+print itself in any format, count copies of an allele, and compare itself to
+another call.</p>
+<h2 id="load-hla-calls">Load HLA calls<a class="headerlink" href="#load-hla-calls" title="Permanent link">&para;</a></h2>
+<p>HLA tables are in the catalog under <code>hla</code>, one block per caller. Load them
+like any other table:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">cohort</span>
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">cohort</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">)</span>
+<span class="n">hla</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"hla.hlahd"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">hla</span><span class="p">[[</span><span class="s2">"patient_id"</span><span class="p">,</span> <span class="s2">"seqID"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"DRB1"</span><span class="p">]]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  patient_id    seqID                A                B                   DRB1
+0       P001  EX-0001  A*02:01/A*24:02  B*07:02/B*44:02  DRB1*04:01/DRB1*15:01
+1       P002  EX-0002  A*01:01/A*03:01  B*08:01/B*35:01  DRB1*01:01/DRB1*03:01
+2       P004  EX-0003  A*02:01/A*02:01  B*44:03/B*51:01  DRB1*07:01/DRB1*13:01
+3       P003  EX-0004  A*11:01/A*24:02  B*40:01/B*46:01  DRB1*09:01/DRB1*12:02
+4       P005  EX-0005  A*03:01/A*68:01  B*07:02/B*15:01  DRB1*11:01/DRB1*15:01
+</code></pre></div>
+<p>The gene columns look like text, but each cell is an <code>HLAgenotype</code>. The two
+alleles are always stored in sorted order, so <code>DRB1*15:01/04:01</code> in the file
+becomes <code>DRB1*04:01/DRB1*15:01</code>.</p>
+<p>How a file is read depends on its catalog entry's <code>loader</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Loader</th>
+<th>Used for</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HLA</code></td>
+<td>every entry under <code>hla:</code> unless it says otherwise</td>
+<td>gene columns <code>A</code> (<code>A*02:01/24:02</code>) or allele pairs <code>A_1</code>, <code>A_2</code></td>
+</tr>
+<tr>
+<td><code>HLA-HD</code></td>
+<td>HLA-HD output</td>
+<td>same as <code>HLA</code></td>
+</tr>
+<tr>
+<td><code>HIBAG</code></td>
+<td>raw HIBAG output</td>
+<td><code>allele1_A</code> and <code>allele2_A</code>, plus <code>prob_A</code></td>
+</tr>
+</tbody>
+</table>
+<p>Only genes in <code>config.hla_genes</code> (A, B, C, DRB1, DQA1, DQB1, DPB1) are turned
+into genotypes. Any other column is left as it is in the file.</p>
+<h3 id="hibag-probabilities">HIBAG probabilities<a class="headerlink" href="#hibag-probabilities" title="Permanent link">&para;</a></h3>
+<p>HIBAG output has one file per reference panel. Each genotype loaded from it
+carries HIBAG's posterior probability as <code>.prob</code>. The <code>prob_A</code> column is kept
+too:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hibag</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"hla.hibag"</span><span class="p">,</span> <span class="n">panel</span><span class="o">=</span><span class="s2">"african"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">hibag</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">prob</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0.97
+</code></pre></div>
+<h2 id="work-with-a-genotype">Work with a genotype<a class="headerlink" href="#work-with-a-genotype" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">gt</span> <span class="o">=</span> <span class="n">hla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span>
+<span class="n">gt</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>HLAgenotype('A*02:01/A*24:02')
+</code></pre></div>
+<p><code>str(gt)</code> gives <code>A*02:01/A*24:02</code>. For another layout, use <code>genotype()</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gt.genotype(format="standard2")</code></td>
+<td><code>'A*02:01/A*24:02'</code></td>
+</tr>
+<tr>
+<td><code>gt.genotype(format="standard")</code></td>
+<td><code>'A*02:01/24:02'</code></td>
+</tr>
+<tr>
+<td><code>gt.genotype(format="standard_no_gene")</code></td>
+<td><code>'02:01/24:02'</code></td>
+</tr>
+<tr>
+<td><code>gt.genotype(format="tuple")</code></td>
+<td><code>(('02', '01'), ('24', '02'))</code></td>
+</tr>
+<tr>
+<td><code>gt.genotype()</code></td>
+<td>the two alleles, as <code>HLAallele</code> objects</td>
+</tr>
+</tbody>
+</table>
+<p>Pass <code>digits</code> to get a lower resolution. Two digits make one field, so 4 is
+2-field:</p>
+<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">HLAgenotype</span><span class="p">(</span><span class="s2">"A*11:01:01/24:02:01"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">genotype</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">"standard2"</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>'A*11:01/A*24:02'
+</code></pre></div>
+<p>Other useful attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gt.a1</code>, <code>gt.a2</code></td>
+<td>the two alleles (<code>HLAallele</code>), missing one last</td>
+</tr>
+<tr>
+<td><code>gt.gene</code></td>
+<td><code>"A"</code></td>
+</tr>
+<tr>
+<td><code>gt.fields</code></td>
+<td>resolution of the lower-resolution allele, in fields</td>
+</tr>
+<tr>
+<td><code>gt.missing_alleles</code></td>
+<td><code>0</code>, <code>1</code> or <code>2</code></td>
+</tr>
+</tbody>
+</table>
+<p>A missing allele is written <code>.</code>, so <code>A*02:01/.</code> has one missing allele. A blank
+cell becomes <code>./.</code>.</p>
+<h3 id="allele-dosages">Allele dosages<a class="headerlink" href="#allele-dosages" title="Permanent link">&para;</a></h3>
+<p><code>copies_of()</code> counts how many of the two alleles match, which gives an allele
+dosage for association tests:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hla</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">gt</span><span class="p">:</span> <span class="n">gt</span><span class="o">.</span><span class="n">copies_of</span><span class="p">(</span><span class="s2">"A*02:01"</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0    1
+1    0
+2    2
+3    0
+4    0
+Name: A, dtype: int64
+</code></pre></div>
+<p>Save it as a column with <code>hla["A*02:01"] = ...</code>.</p>
+<p>The match is made at the resolution of the allele you ask about, so
+<code>copies_of("A*02:01")</code> also counts <code>A*02:01:01</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Rows with no HLA call</p>
+<p>After a merge, patients with no row in the HLA table have <code>NaN</code> in the gene
+columns, not a genotype. Check before calling a method:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.hla</span><span class="w"> </span><span class="kn">import</span> <span class="n">HLAgenotype</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="s2">"hla.hlahd"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"A*02:01"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">gt</span><span class="p">:</span> <span class="n">gt</span><span class="o">.</span><span class="n">copies_of</span><span class="p">(</span><span class="s2">"A*02:01"</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">HLAgenotype</span><span class="p">)</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+<h2 id="compare-two-callers">Compare two callers<a class="headerlink" href="#compare-two-callers" title="Permanent link">&para;</a></h2>
+<p><code>concordance()</code> scores how well two calls for the same gene agree:</p>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2</code></td>
+<td>both alleles match</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>one allele matches</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>neither matches</td>
+</tr>
+<tr>
+<td><code>NaN</code></td>
+<td>either call is missing an allele</td>
+</tr>
+</tbody>
+</table>
+<p>The two calls are compared at the lower of their resolutions, so <code>A*11:01:01</code>
+and <code>A*11:01:02</code> match as <code>11:01</code>. Pass <code>digits=4</code> to compare at no more
+than 2-field.</p>
+<p>To compare HLA-HD and HIBAG patient by patient, load both. They share the
+column <code>A</code>, so the second table's copy is prefixed with its name:</p>
+<div class="highlight"><pre><span></span><code><span class="n">both</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"hla.hlahd"</span><span class="p">,</span> <span class="s2">"hla.hibag"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">both</span><span class="p">[</span><span class="s2">"A_concordance"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">concordance</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">both</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span> <span class="n">both</span><span class="p">[</span><span class="s2">"hla.hibag.raw.A"</span><span class="p">])</span>
+<span class="p">]</span>
+<span class="n">both</span><span class="p">[[</span><span class="s2">"patient_id"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"hla.hibag.raw.A"</span><span class="p">,</span> <span class="s2">"A_concordance"</span><span class="p">]]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  patient_id                A  hla.hibag.raw.A  A_concordance
+0       P001  A*02:01/A*24:02  A*02:01/A*24:02              2
+1       P002  A*01:01/A*03:01  A*01:01/A*03:01              2
+2       P004  A*02:01/A*02:01  A*02:01/A*02:01              2
+3       P003  A*11:01/A*24:02  A*11:01/A*24:02              2
+</code></pre></div>
+<p>For two files that aren't in the catalog, use
+<a href="#c4-hla_concordance"><code>c4 hla_concordance</code></a> instead.</p>
+<h2 id="change-table-layout">Change table layout<a class="headerlink" href="#change-table-layout" title="Permanent link">&para;</a></h2>
+<p>Some tools want one column per allele (<code>A_1</code>, <code>A_2</code>) rather than one per gene.
+<code>split_genotype</code> and <code>merge_genotype</code> convert between the two, and both return
+objects:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.hla</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_genotype</span><span class="p">,</span> <span class="n">merge_genotype</span>
+
+<span class="n">split</span> <span class="o">=</span> <span class="n">split_genotype</span><span class="p">(</span><span class="n">hla</span><span class="p">,</span> <span class="n">gene_list</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>    <span class="c1"># A -&gt; A_1, A_2 (HLAallele)</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">merge_genotype</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="n">gene_list</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span> <span class="c1"># A_1, A_2 -&gt; A (HLAgenotype)</span>
+</code></pre></div>
+<h2 id="save-to-a-file">Save to a file<a class="headerlink" href="#save-to-a-file" title="Permanent link">&para;</a></h2>
+<p>Writing a table with <code>to_csv</code> saves each genotype as <code>A*02:01/A*24:02</code>. For
+another format, convert the columns first:</p>
+<div class="highlight"><pre><span></span><code><span class="n">out</span> <span class="o">=</span> <span class="n">hla</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"DRB1"</span><span class="p">]:</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">gene</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">gene</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">gt</span><span class="p">:</span> <span class="n">gt</span><span class="o">.</span><span class="n">genotype</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">"standard_no_gene"</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"hla_2field.tsv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>c4 reads a saved file back into genotypes, in any of these text formats.</p>
+<h2 id="command-line">Command line<a class="headerlink" href="#command-line" title="Permanent link">&para;</a></h2>
+<p>The <code>c4</code> command converts and compares HLA files without writing Python. Every
+command reads <code>.csv</code>, <code>.tsv</code> or space-separated files. Each file can have
+genotype columns (<code>A</code>) or allele columns (<code>A_1</code>, <code>A_2</code>).</p>
+<h3 id="c4-split-hla"><code>c4 split-hla</code><a class="headerlink" href="#c4-split-hla" title="Permanent link">&para;</a></h3>
+<p>Genotype columns to allele columns. With no output file, the result is
+printed:</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>split-hla<span class="w"> </span>calls.csv<span class="w"> </span>--genes<span class="w"> </span>A,B<span class="w"> </span>--columns<span class="w"> </span>ID<span class="w"> </span>--digits<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  ID     A_1     A_2     B_1     B_2
+S001 A*01:01       . B*07:02 B*08:01
+S002 A*02:01 A*03:01       .       .
+...
+</code></pre></div>
+<p>Give an output file to save it instead: <code>c4 split-hla calls.csv calls_split.tsv ...</code>.</p>
+<h3 id="c4-merge-hla"><code>c4 merge-hla</code><a class="headerlink" href="#c4-merge-hla" title="Permanent link">&para;</a></h3>
+<p>Allele columns to genotype columns:</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>merge-hla<span class="w"> </span>calls_split.csv<span class="w"> </span>calls.tsv<span class="w"> </span>--genes<span class="w"> </span>A,B<span class="w"> </span>--columns<span class="w"> </span>ID
+</code></pre></div>
+<p>Options for both commands:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>all canonical genes</td>
+<td>Comma-separated genes, e.g. <code>A,B,DRB1</code></td>
+</tr>
+<tr>
+<td><code>--columns</code>, <code>-c</code></td>
+<td>every column</td>
+<td>Other columns to keep, comma-separated</td>
+</tr>
+<tr>
+<td><code>--digits</code>, <code>-d</code></td>
+<td>all fields</td>
+<td>Resolution, e.g. <code>4</code> for 2-field</td>
+</tr>
+<tr>
+<td><code>--format</code>, <code>-f</code></td>
+<td><code>standard</code></td>
+<td><code>standard</code> (<code>A*02:01/24:02</code>), <code>standard2</code> (<code>A*02:01/A*24:02</code>) or <code>standard_no_gene</code> (<code>02:01/24:02</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c4-hla_concordance"><code>c4 hla_concordance</code><a class="headerlink" href="#c4-hla_concordance" title="Permanent link">&para;</a></h3>
+<p>Compare two typing files, sample by sample:</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>hla_concordance<span class="w"> </span>wes.csv<span class="w"> </span>imputed.tsv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--file1_id<span class="w"> </span>seqID<span class="w"> </span>--file2_id<span class="w"> </span>IID<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genes<span class="w"> </span>A,B<span class="w"> </span>--digits<span class="w"> </span><span class="m">4</span><span class="w"> </span>--output<span class="w"> </span>concordance.tsv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>3 IDs in both files (1 only in file 1, 1 only in file 2)
+gene  compared  full  partial  none  allele_concordance
+   A         3     2        1     0               0.833
+   B         2     1        1     0               0.750
+✓ Concordance results saved: concordance.tsv
+</code></pre></div>
+<p><code>concordance.tsv</code> has one row per ID found in both files, with <code>A_file1</code>,
+<code>A_file2</code> and <code>A_concordance</code> for each gene. <code>allele_concordance</code> is the
+number of matching alleles divided by the number compared.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--file1_id</code>, <code>--file2_id</code></td>
+<td><em>(required)</em></td>
+<td>ID column in each file</td>
+</tr>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>every canonical gene in both files</td>
+<td>Comma-separated genes</td>
+</tr>
+<tr>
+<td><code>--digits</code>, <code>-d</code></td>
+<td>all fields</td>
+<td>Compare at no more than this resolution</td>
+</tr>
+<tr>
+<td><code>--output</code>, <code>-o</code></td>
+<td>print</td>
+<td>Per-sample results file</td>
+</tr>
+</tbody>
+</table>
+<p>The two files can use different ID columns, but the IDs themselves must match.
+To link exome and array IDs, load both through the catalog instead
+(<a href="../data/ids/">How IDs link</a>).</p>
+<p>See <a href="../reference/hla/"><code>c4.hla</code></a> for every class and function.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../data/troubleshooting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Troubleshooting">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Troubleshooting
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../reference/cohort/" class="md-footer__link md-footer__link--next" aria-label="Next: c4.cohort">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                c4.cohort
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "toc.follow", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
