@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/reference/cohort/">
+      
       
         <link rel="prev" href="../../data/troubleshooting/">
       
@@ -853,13 +855,13 @@
         <p>Per-cohort data access, driven by the data catalog (catalog.yaml).</p>
 <div class="highlight"><pre><span></span><code>from c4.cohort import cohort
 
-geri = cohort("geri")                       # prints what's available
-pheno = geri.load("pheno")                  # DataFrame with patient_id first
-df = geri.load("pheno", "pcs", "hla.hlahd") # several tables, merged on patient_id
-hla = geri.load("hla.hibag.raw", panel="african")
-vcf = geri.path("dna.imputed", chrom=6)     # genetic data: a path, not a DataFrame
-geri.describe("OS_mo")                      # data dictionary lookup
-geri.check()                                # report missing files / ID problems
+demo = cohort("demo")                       # prints what's available
+pheno = demo.load("pheno")                  # DataFrame with patient_id first
+df = demo.load("pheno", "pcs", "hla.hlahd") # several tables, merged on patient_id
+hla = demo.load("hla.hibag.raw", panel="african")
+vcf = demo.path("dna.imputed", chrom=6)     # genetic data: a path, not a DataFrame
+demo.describe("OS_mo")                      # data dictionary lookup
+demo.check()                                # report missing files / ID problems
 </code></pre></div>
 <p>Every loaded table gets a patient_id column, looked up through the cohort's
 id_map from whatever ID type the table uses (exome, array, imputed). Merging is
@@ -948,7 +950,7 @@ therefore always a join on patient_id.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Path to a data file, e.g. <code>geri.path("dna.imputed", chrom=6)</code>.</p>
+        <p>Path to a data file, e.g. <code>demo.path("dna.imputed", chrom=6)</code>.</p>
 
 
     </div>
@@ -967,7 +969,7 @@ therefore always a join on patient_id.</p>
     <div class="doc doc-contents ">
 
         <p>Every path a templated entry can take, keyed by parameter value, e.g.
-<code>geri.paths("dna.imputed")</code> -&gt; {1: .../chr1.dose.vcf.gz, ...}.</p>
+<code>demo.paths("dna.imputed")</code> -&gt; {1: .../chr1.dose.vcf.gz, ...}.</p>
 
 
     </div>
@@ -1206,7 +1208,7 @@ and the id_map links cleanly. Returns a list of problems (empty if none).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Cohort name, e.g. "geri" or "GeRI".</p>
+                <p>Cohort name or alias, e.g. "demo" or "DEMO".</p>
               </div>
             </td>
             <td>

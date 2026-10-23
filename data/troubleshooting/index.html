@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/data/troubleshooting/">
+      
       
         <link rel="prev" href="../catalog/">
       
@@ -682,7 +684,7 @@ wrong; fix the map (and its build script).</p>
 </code></pre></div>
 <p>The catalog entry doesn't say what kind of ID the table uses yet. Fill in
 <code>type</code>.</p>
-<div class="highlight"><pre><span></span><code>ValueError: No id_map is set for coh in the catalog.
+<div class="highlight"><pre><span></span><code>ValueError: No id_map is set for demo in the catalog.
 </code></pre></div>
 <p>The cohort has no ID map yet, so only tables keyed by patient ID can be
 loaded. Build one (<a href="../ids/#rules-for-an-id-map">How IDs link</a>) and add its path.</p>

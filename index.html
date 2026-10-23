@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/">
+      
       
       
         <link rel="next" href="data/loading/">
@@ -638,13 +640,14 @@ dataset the lab uses, and a small API for finding, loading and merging them.</p>
 <p class="admonition-title">Example data</p>
 <p>Every example on these pages uses a made-up cohort called <code>demo</code>, with
 fake patients, samples and paths. Real cohorts work the same way.</p>
-<p>The demo ships with the repository in <code>examples/demo/</code>, so you can follow
-along. From the repository root:</p>
+<p>If you have access to the c4 repository (it is private to the lab), the
+demo is in <code>examples/demo/</code> and you can follow along. From the repository
+root:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">C4_CATALOG</span><span class="o">=</span>examples/demo/catalog.yaml
 python<span class="w"> </span>examples/demo/run_examples.py<span class="w">    </span><span class="c1"># runs every example on these pages</span>
 </code></pre></div>
-<p>The docs show the demo's data folder as <code>/data/lab</code>; on your machine it is
-<code>examples/demo/data</code>.</p>
+<p>The docs show the demo's data folder as <code>/data/lab</code>; in the repository it
+is <code>examples/demo/data</code>.</p>
 </div>
 <h2 id="in-30-seconds">In 30 seconds<a class="headerlink" href="#in-30-seconds" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">cohort</span>
