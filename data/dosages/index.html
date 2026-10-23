@@ -845,8 +845,19 @@ loaded on <code>patient_id</code>:</p>
   none matches, or you gave no alleles, the first record is used, with a
   warning.</li>
 <li><strong>Another genome build:</strong> with <code>--variant-build b37</code> (or <code>build="b37"</code>),
-  positions are lifted over first. The chain comes from the catalog's
-  <a href="../catalog/#shared-resources">resources</a>.</li>
+  positions are lifted over first, in Python with
+  <a href="https://pypi.org/project/pyliftover/">pyliftover</a> (no R needed). The chain
+  comes from the catalog's <a href="../catalog/#shared-resources">resources</a>.<ul>
+<li>Positions are 1-based throughout, as in VCFs and dbSNP.</li>
+<li>Where the chain maps a position onto the reverse strand of the new
+  build, the alleles are complemented (A↔T, C↔G) before matching, and the
+  variant gets a warning saying so. Indels there are reported as errors,
+  since their position would also shift.</li>
+<li>A position that falls in a gap of the chain, maps to more than one
+  place, or maps to another chromosome is an error for that variant;
+  the others still run.</li>
+</ul>
+</li>
 <li><strong>Samples:</strong> every sample in the VCF, linked to <code>patient_id</code> through the ID
   map. Samples that aren't patients (controls) are kept with an empty
   <code>patient_id</code>. Patients marked <code>drop=1</code> are left out unless you keep them.</li>
