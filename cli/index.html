@@ -1,0 +1,2381 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Data loading and analysis tools for the C4 cluster">
+      
+      
+      
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/cli/">
+      
+      
+        <link rel="prev" href="../hla/">
+      
+      
+        <link rel="next" href="../reference/cohort/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Command line - c4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#command-line" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="c4" class="md-header__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            c4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Command line
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="c4" class="md-nav__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    c4
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data loading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data loading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loading and merging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/ids/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How IDs link
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The data catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variants-survival-and-prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variants, survival and PRS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clumping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clumping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genotype-qc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Genotype QC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liftover-of-a-variant-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liftover of a variant file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HLA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="c4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clump
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        convert-p
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dosages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dosages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genotype-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        genotype-correlation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hla_concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hla_concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        liftover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        merge-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        split-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#survival" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        survival
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vcf-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vcf-overlap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variants-survival-and-prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variants, survival and PRS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clumping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clumping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genotype-qc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Genotype QC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liftover-of-a-variant-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liftover of a variant file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HLA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="c4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clump
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        convert-p
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dosages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dosages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genotype-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        genotype-correlation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hla_concordance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hla_concordance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        liftover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        merge-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split-hla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        split-hla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#survival" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        survival
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vcf-overlap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vcf-overlap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="command-line">Command line<a class="headerlink" href="#command-line" title="Permanent link">&para;</a></h1>
+<p>Installing c4 (<code>pip install -e .</code>) gives you the <code>c4</code> command. <code>c4 --help</code> lists
+the commands, and <code>c4 &lt;command&gt; --help</code> shows every option. The
+<a href="#full-reference">full reference</a> at the bottom of this page is generated from
+that same help text.</p>
+<p>In the examples, replace <code>COHORT</code> with a cohort name from the
+<a href="../data/catalog/">data catalog</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dosages</code></td>
+<td>Dosages for a few variants from a cohort's VCFs, with <code>patient_id</code></td>
+</tr>
+<tr>
+<td><code>survival</code></td>
+<td>Cox PH survival test per variant</td>
+</tr>
+<tr>
+<td><code>prs</code></td>
+<td>Survival test of a weighted polygenic risk score</td>
+</tr>
+<tr>
+<td><code>clump</code></td>
+<td>LD-clump GWAS summary statistics against a VCF or PLINK panel</td>
+</tr>
+<tr>
+<td><code>concordance</code></td>
+<td>Genotype concordance between samples in two VCF/PLINK files</td>
+</tr>
+<tr>
+<td><code>vcf-overlap</code></td>
+<td>Variants shared by two VCFs</td>
+</tr>
+<tr>
+<td><code>genotype-correlation</code></td>
+<td>Per-sample Pearson r between two VCFs' dosages</td>
+</tr>
+<tr>
+<td><code>liftover</code></td>
+<td>Lift a file of variant positions to another genome build</td>
+</tr>
+<tr>
+<td><code>split-hla</code>, <code>merge-hla</code></td>
+<td>Switch HLA tables between <code>A</code> and <code>A_1</code>/<code>A_2</code> columns</td>
+</tr>
+<tr>
+<td><code>hla_concordance</code></td>
+<td>Per-sample, per-gene concordance between two HLA call files</td>
+</tr>
+<tr>
+<td><code>convert-p</code></td>
+<td><em>Not yet implemented</em> (planned: P-group conversion)</td>
+</tr>
+</tbody>
+</table>
+<p>External tools needed on your <code>PATH</code>: <strong>bcftools</strong> for <code>dosages</code>, <code>survival</code>,
+<code>prs</code>, <code>concordance</code>, <code>vcf-overlap</code> and <code>genotype-correlation</code>; <strong>plink2</strong> (or
+PLINK 1.9) for <code>clump</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Writing variants</p>
+<p>Variants are <code>chr:pos:ref:alt</code>, <code>chr:pos:ref&gt;alt</code> or <code>chr:pos</code>; the <code>chr</code>
+prefix is optional. <strong>Quote anything with <code>&gt;</code></strong>: unquoted, the shell treats
+it as a redirect and writes to a file named after the ALT allele.</p>
+</div>
+<h2 id="variants-survival-and-prs">Variants, survival and PRS<a class="headerlink" href="#variants-survival-and-prs" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dosages for a few SNPs: one row per sample, plus snps.variants.tsv</span>
+c4<span class="w"> </span>dosages<span class="w"> </span>--dataset<span class="w"> </span>COHORT<span class="w"> </span>--variants<span class="w"> </span><span class="m">6</span>:32659999:A:G<span class="w"> </span>--variant-list<span class="w"> </span>more.txt<span class="w"> </span>-o<span class="w"> </span>snps.tsv
+
+<span class="c1"># One variant: prints a results table (add --km-plot km.png for a Kaplan-Meier plot)</span>
+c4<span class="w"> </span>survival<span class="w"> </span>--dataset<span class="w"> </span>COHORT<span class="w"> </span>--variants<span class="w"> </span><span class="s1">'4:1455432:A&gt;T'</span><span class="w"> </span>--survival<span class="w"> </span>OS
+
+<span class="c1"># Many variants in b37 (lifted to the VCFs' build automatically), saved to files</span>
+c4<span class="w"> </span>survival<span class="w"> </span>--dataset<span class="w"> </span>COHORT<span class="w"> </span>--variant-list<span class="w"> </span>vars.txt<span class="w"> </span>--variant-build<span class="w"> </span>b37<span class="w"> </span>--survival<span class="w"> </span>PFS<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span>results.tsv<span class="w"> </span>--save-dosages<span class="w"> </span>dosages.tsv
+
+<span class="c1"># PRS: weights are a headerless 3-column TSV (variant_id, effect_allele, effect)</span>
+c4<span class="w"> </span>prs<span class="w"> </span>--dataset<span class="w"> </span>COHORT<span class="w"> </span>--weights<span class="w"> </span>prs.tsv<span class="w"> </span>--survival<span class="w"> </span>OS<span class="w"> </span>--quantiles<span class="w"> </span><span class="m">5</span><span class="w"> </span>-o<span class="w"> </span>prs_OS/
+</code></pre></div>
+<ul>
+<li>Dosage counts the ALT allele <strong>as you wrote it</strong>. If the VCF has the alleles
+  the other way round, the dosage is flipped and the variant gets a warning.
+  See <a href="../data/dosages/">Extracting variants</a> for how matching works.</li>
+<li>Covariates, endpoints and which VCFs to use come from the cohort's
+  <code>survival:</code> block in the <a href="../data/catalog/#survival-settings">catalog</a>.</li>
+<li><code>--variant-build</code> lifts variants with the catalog's chain files; give
+  <code>--chain-file</code> to use another.</li>
+<li><code>prs</code> writes <code>prs.log</code>, <code>individual_prs.tsv</code>, <code>prs_variants.tsv</code> and plots
+  into its output directory. The weights file must have exactly three
+  columns; anything else is an error naming the line.</li>
+</ul>
+<h2 id="clumping">Clumping<a class="headerlink" href="#clumping" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>clump<span class="w"> </span>results.PHENO.glm.logistic.hybrid<span class="w"> </span>panel.chr6.vcf.gz<span class="w"> </span>-o<span class="w"> </span>out/chr6<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chr<span class="w"> </span><span class="m">6</span><span class="w"> </span>--kgp-pops<span class="w"> </span>EUR<span class="w"> </span>--clump-p1<span class="w"> </span>1e-5<span class="w"> </span>--clump-r2<span class="w"> </span><span class="m">0</span>.2<span class="w"> </span>--clump-kb<span class="w"> </span><span class="m">500</span>
+</code></pre></div>
+<ul>
+<li>GWAS and panel variants are matched on chromosome, position and alleles
+  (REF/ALT swaps allowed), whatever ID scheme each uses.</li>
+<li>For a per-chromosome panel, give one chromosome's file; the others are found
+  by substituting into its <code>chr&lt;N&gt;</code>.</li>
+<li><code>--kgp-pops</code> subsets a 1000 Genomes panel to populations or super-populations.</li>
+<li>Writes <code>{out}.clumps</code>, <code>{out}.lead.tsv</code> (index variants with their GWAS
+  stats), <code>{out}.dropped.tsv</code> (unmatched variants, with a reason) and
+  <code>{out}.log</code>.</li>
+<li>plink2's <code>--memory</code> defaults to half of the SLURM or cgroup job limit, so it
+  isn't killed on shared nodes. If the plink2 build has no <code>--clump</code>, PLINK 1.9
+  is used.</li>
+</ul>
+<h2 id="genotype-qc">Genotype QC<a class="headerlink" href="#genotype-qc" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Concordance between every sample pair across two files, plus within each file</span>
+c4<span class="w"> </span>concordance<span class="w"> </span>array.vcf.gz<span class="w"> </span>exome.vcf.gz<span class="w"> </span>concordance.tsv<span class="w"> </span>--within
+
+<span class="c1"># Only specific pairs (file-1 ID, file-2 ID per line)</span>
+c4<span class="w"> </span>concordance<span class="w"> </span>array.vcf.gz<span class="w"> </span>exome.vcf.gz<span class="w"> </span>concordance.tsv<span class="w"> </span>--between-pairs<span class="w"> </span>pairs.tsv
+
+<span class="c1"># Shared variants (CHROM POS), e.g. to subset both files first</span>
+c4<span class="w"> </span>vcf-overlap<span class="w"> </span>array.vcf.gz<span class="w"> </span>imputed.vcf.gz<span class="w"> </span>overlap.tsv<span class="w"> </span>--remove-dup
+
+<span class="c1"># Per-sample correlation of dosages (DS) between two VCFs</span>
+c4<span class="w"> </span>genotype-correlation<span class="w"> </span>vcf1.vcf.gz<span class="w"> </span>vcf2.vcf.gz<span class="w"> </span>corr.tsv<span class="w"> </span>--dosage<span class="w"> </span>--samples<span class="w"> </span>map.tsv
+</code></pre></div>
+<p><strong>Concordance output:</strong> each between-file pair gets two rows.
+- <code>all_exclHomRef</code>: sites where the file-2 sample is homozygous reference are
+  left out.
+- <code>all_inclHomRef</code>: all sites.</p>
+<p><code>P2</code>, <code>P1</code> and <code>P0</code> are the share of sites matching on 2, 1 or 0 alleles.
+Within-file pairs get one row, <code>all</code>. Variants are matched on chromosome,
+position and alleles; multi-allelic records are left out. On millions of
+variants it can be slow, so subset to shared positions first.</p>
+<p><strong>Correlation</strong> matches variants on CHROM, POS, REF and ALT. Without
+<code>--dosage</code>, genotypes are counted as non-reference alleles, so haploid calls
+work. <code>--verbose</code> writes the sums needed to combine results across
+chromosomes.</p>
+<h2 id="liftover-of-a-variant-file">Liftover of a variant file<a class="headerlink" href="#liftover-of-a-variant-file" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>liftover<span class="w"> </span>hg19ToHg38.over.chain<span class="w"> </span>variants.bed<span class="w"> </span>variants_hg38.bed
+c4<span class="w"> </span>liftover<span class="w"> </span>hg19ToHg38.over.chain<span class="w"> </span>variants.txt<span class="w"> </span>variants_hg38.bed<span class="w"> </span>--chrom-col<span class="w"> </span><span class="m">0</span><span class="w"> </span>--start-col<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<ul>
+<li><code>.bed</code> input is 0-based, as BED is. For other files give <code>--chrom-col</code> and
+  <code>--start-col</code>; positions are 1-based (as in VCFs) unless <code>--zero-based</code>.</li>
+<li>Output is a 3-column BED file in input order. Rows that can't be lifted go to
+  <code>&lt;output&gt;.unmapped</code> with the reason: not in the new build, mapping to several
+  places, or a region that doesn't lift as one piece.</li>
+<li>Uses pyliftover, like the variant liftover above. No R needed.</li>
+</ul>
+<h2 id="hla">HLA<a class="headerlink" href="#hla" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>split-hla<span class="w"> </span>calls.csv<span class="w"> </span>calls_split.tsv<span class="w"> </span>--genes<span class="w"> </span>A,B<span class="w"> </span>--columns<span class="w"> </span>ID<span class="w"> </span>--digits<span class="w"> </span><span class="m">4</span>
+c4<span class="w"> </span>merge-hla<span class="w"> </span>calls_split.tsv<span class="w"> </span>calls.tsv
+c4<span class="w"> </span>hla_concordance<span class="w"> </span>wes.csv<span class="w"> </span>imputed.csv<span class="w"> </span>--file1_id<span class="w"> </span>seqID<span class="w"> </span>--file2_id<span class="w"> </span>genotype_id<span class="w"> </span>-o<span class="w"> </span>hla_concordance.tsv
+</code></pre></div>
+<p>See <a href="../hla/#command-line">HLA calls</a> for these commands and the Python HLA tools.</p>
+<h2 id="full-reference">Full reference<a class="headerlink" href="#full-reference" title="Permanent link">&para;</a></h2>
+<p>Generated from <code>c4 &lt;command&gt; --help</code>.</p>
+<h2 id="c4">c4<a class="headerlink" href="#c4" title="Permanent link">&para;</a></h2>
+<p>C4 toolkit for various commands.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 [OPTIONS] COMMAND [ARGS]...
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--install-completion</code></td>
+<td>boolean</td>
+<td>Install completion for the current shell.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--show-completion</code></td>
+<td>boolean</td>
+<td>Show completion for the current shell, to copy it or customize the installation.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Subcommands</strong></p>
+<ul>
+<li><em>clump</em>: LD-clump GWAS summary statistics using a VCF or PLINK genotype panel.</li>
+<li><em>concordance</em>: Calculate genotype concordance between two variant call files.</li>
+<li><em>convert-p</em>: [Not yet implemented] Convert HLA alleles to P-group designations.</li>
+<li><em>dosages</em>: Extract dosages for a few variants from a cohort's VCFs.</li>
+<li><em>genotype-correlation</em>: Compute per-sample Pearson r and r² between dosage vectors across two VCFs.</li>
+<li><em>hla_concordance</em>: Compare HLA typing between two files.</li>
+<li><em>liftover</em>: Lift variant positions in a file to another genome build.</li>
+<li><em>merge-hla</em>: Merge separate allele columns back into HLA genotype columns.</li>
+<li><em>prs</em>: Test a weighted polygenic risk score (PRS) for survival association.</li>
+<li><em>split-hla</em>: Split HLA genotype columns into separate allele columns.</li>
+<li><em>survival</em>: Run Cox PH survival analysis for one or more variants.</li>
+<li><em>vcf-overlap</em>: Find overlapping variants between two VCF files.</li>
+</ul>
+<h3 id="clump">clump<a class="headerlink" href="#clump" title="Permanent link">&para;</a></h3>
+<p>LD-clump GWAS summary statistics using a VCF or PLINK genotype panel.</p>
+<p>GWAS and panel variants are harmonized to CHROM:POS:REF:ALT before
+clumping (matching on the unordered allele pair, so REF/ALT swaps still
+match). Variants that can't be matched are reported with a reason.</p>
+<p>Per-chromosome panels: pass any one chromosome's file (e.g.
+ALL.chr3.phased.vcf.gz) and the files for the other GWAS chromosomes are
+found by substituting into the 'chrN' token.</p>
+<p>Writes {out}.clumps (plink2 report), {out}.lead.tsv (index variants with
+their GWAS stats), {out}.dropped.tsv (unmatched GWAS variants) and {out}.log.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 clump results.PHENO.glm.logistic.hybrid 1kg_EUR -o clumped/pheno
+
+c4 clump results.assoc 1kg.chr6.vcf.gz -o out/chr6 --chr 6 --kgp-pops EUR,YRI \
+    --clump-p1 1e-5 --clump-r2 0.2 --clump-kb 500
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 clump [OPTIONS] GWAS GENO
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code>, <code>-o</code></td>
+<td>path</td>
+<td>Output prefix</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--chr</code></td>
+<td>text</td>
+<td>Only clump GWAS variants on this chromosome (e.g. 6, chr6, X)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--kgp-pops</code></td>
+<td>text</td>
+<td>Comma-separated 1000 Genomes populations and/or super-populations to subset a KGP panel to (e.g. EUR,AMR,YRI). Can't be combined with --keep.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--keep</code></td>
+<td>path</td>
+<td>Sample ID file to subset the panel to (plink2 --keep format: IID, or FID IID)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--clump-p1</code></td>
+<td>float</td>
+<td>Significance threshold for index variants</td>
+<td><code>5e-08</code></td>
+</tr>
+<tr>
+<td><code>--clump-p2</code></td>
+<td>float</td>
+<td>Significance threshold for clumped variants</td>
+<td><code>0.01</code></td>
+</tr>
+<tr>
+<td><code>--clump-r2</code></td>
+<td>float</td>
+<td>LD r² threshold for clumping</td>
+<td><code>0.1</code></td>
+</tr>
+<tr>
+<td><code>--clump-kb</code></td>
+<td>float</td>
+<td>Clumping window in kb</td>
+<td><code>250</code></td>
+</tr>
+<tr>
+<td><code>--chrom-col</code></td>
+<td>text</td>
+<td>GWAS chromosome column (default: auto-detect)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--pos-col</code></td>
+<td>text</td>
+<td>GWAS position column (default: auto-detect)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--ref-col</code></td>
+<td>text</td>
+<td>GWAS REF allele column (default: auto-detect)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--alt-col</code></td>
+<td>text</td>
+<td>GWAS ALT allele column (default: auto-detect)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--p-col</code></td>
+<td>text</td>
+<td>GWAS p-value column (default: auto-detect)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--threads</code></td>
+<td>integer</td>
+<td>plink2 --threads</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--memory</code></td>
+<td>integer</td>
+<td>plink2 --memory (MiB). Default: half of the SLURM/cgroup job memory limit, if one is found</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--plink2</code></td>
+<td>text</td>
+<td>Path to the plink2 executable</td>
+<td><code>plink2</code></td>
+</tr>
+<tr>
+<td><code>--plink1</code></td>
+<td>text</td>
+<td>Path to PLINK1.9, used for clumping only if the plink2 build has no --clump</td>
+<td><code>plink</code></td>
+</tr>
+<tr>
+<td><code>--verbose</code>, <code>-v</code></td>
+<td>boolean</td>
+<td>Also print each plink command as it runs</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="concordance">concordance<a class="headerlink" href="#concordance" title="Permanent link">&para;</a></h3>
+<p>Calculate genotype concordance between two variant call files.</p>
+<p>Example:
+    c4 concordance file1.vcf file2.bed output.tsv --within
+    c4 concordance file1.vcf file2.bed output.tsv --samples1 samples1.txt --samples2 samples2.txt</p>
+<p>Computes pairwise concordance between samples in two files.
+Optionally computes within-file concordance with --within flag.</p>
+<p>Each between-file pair gets two rows: all_exclHomRef (sites where the
+file-2 sample is homozygous reference left out) and all_inclHomRef (all
+sites). Within-file pairs get one row, labelled "all".</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 concordance [OPTIONS] FILE1 FILE2 OUTPUT
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--within</code>, <code>-w</code></td>
+<td>boolean</td>
+<td>Also compute within-file concordance</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--samples1</code>, <code>-s1</code></td>
+<td>path</td>
+<td>File with sample IDs to use from file1 (one per line)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--samples2</code>, <code>-s2</code></td>
+<td>path</td>
+<td>File with sample IDs to use from file2 (one per line)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--between-pairs</code>, <code>-b</code></td>
+<td>path</td>
+<td>File containing sample ID pairs to compare between files (tab-separated: file1_ID file2_ID per line).</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="convert-p">convert-p<a class="headerlink" href="#convert-p" title="Permanent link">&para;</a></h3>
+<p>[Not yet implemented] Convert HLA alleles to P-group designations.</p>
+<p>Planned usage:
+    c4 convert-p input.csv output.csv --genes DRB1 --genes DQB1 --drop</p>
+<p>Will read columns like DRB1_1, DRB1_2, DQB1_1, DQB1_2 and add
+DRB1_1_P, DRB1_2_P, DQB1_1_P, DQB1_2_P. See convert_p_impl in
+c4/cli.py for the implementation plan.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 convert-p [OPTIONS] INPUT_FILE OUTPUT_FILE
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>text</td>
+<td>List of gene names (assumes {gene}_1, {gene}_2 columns)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--sep</code>, <code>-s</code></td>
+<td>text</td>
+<td>File separator (default: comma)</td>
+<td><code>,</code></td>
+</tr>
+<tr>
+<td><code>--drop</code></td>
+<td>boolean</td>
+<td>Remove original allele columns after conversion</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--p-nom-file</code></td>
+<td>path</td>
+<td>Custom P-group nomenclature file</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dosages">dosages<a class="headerlink" href="#dosages" title="Permanent link">&para;</a></h3>
+<p>Extract dosages for a few variants from a cohort's VCFs.</p>
+<p>Each column counts copies of the ALT allele as you wrote it; if the VCF
+has the alleles the other way round, the dosage is flipped. Samples are
+linked to patient_id through the cohort's id_map.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 dosages --dataset COHORT --variants 6:32659999:A:G -o hla_snp.tsv
+
+c4 dosages --dataset COHORT --variant-list snps.txt --variant-build b37 -o snps.tsv
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 dosages [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dataset</code>, <code>-d</code></td>
+<td>text</td>
+<td>Cohort name, as listed in the data catalog (c4/catalog.yaml)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--output</code>, <code>-o</code></td>
+<td>path</td>
+<td>Output TSV: one row per sample, one column per variant. How each variant matched goes to NAME.variants.tsv next to it.</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--variants</code>, <code>-v</code></td>
+<td>text</td>
+<td>Variant(s) as chr:pos:ref:alt, 'chr:pos:ref&gt;alt' (quote it) or chr:pos. Repeat the flag for several.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--variant-list</code></td>
+<td>path</td>
+<td>File with one variant per line</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--variant-build</code></td>
+<td>text</td>
+<td>Genome build of the variants (e.g. b37). Default: the VCFs' build.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--dna</code></td>
+<td>text</td>
+<td>Which genetic data set of the cohort to read (a dna: entry in the catalog)</td>
+<td><code>imputed</code></td>
+</tr>
+<tr>
+<td><code>--dosage</code> / <code>--no-dosage</code></td>
+<td>boolean</td>
+<td>Use the DS dosage field (default) vs GT-derived dosage</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>--chain-file</code></td>
+<td>path</td>
+<td>Liftover chain to use instead of the catalog's</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--keep-dropped</code></td>
+<td>boolean</td>
+<td>Keep samples of patients marked drop=1 in the cohort's id_map</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="genotype-correlation">genotype-correlation<a class="headerlink" href="#genotype-correlation" title="Permanent link">&para;</a></h3>
+<p>Compute per-sample Pearson r and r² between dosage vectors across two VCFs.</p>
+<p>Matches samples by ID (or by mapping file) and computes correlation across
+all overlapping variants (matched on CHROM, POS, REF, ALT).</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 genotype-correlation vcf1.vcf.gz vcf2.vcf.gz output.tsv
+
+c4 genotype-correlation vcf1.vcf.gz vcf2.vcf.gz output.tsv --dosage
+
+c4 genotype-correlation vcf1.vcf.gz vcf2.vcf.gz output.tsv \
+    --samples samples.txt --positions positions.txt --verbose
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 genotype-correlation [OPTIONS] VCF1 VCF2 OUTPUT
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dosage</code></td>
+<td>boolean</td>
+<td>Use DS field if present in VCF; falls back to GT if absent.</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--samples</code>, <code>-s</code></td>
+<td>path</td>
+<td>Optional sample file. Single column: sample IDs to use from both VCFs. Two columns (tab-separated): VCF1 ID -&gt; VCF2 ID mapping.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--positions</code>, <code>-p</code></td>
+<td>path</td>
+<td>Optional positions file (two columns: CHROM POS, no header) to subset variants.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--verbose</code>, <code>-v</code></td>
+<td>boolean</td>
+<td>Output Pearson sufficient statistics per sample pair (N, SUM_X, SUM_Y, SUM_X2, SUM_Y2, SUM_XY) to allow genome-wide aggregation across chromosomes.</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--keep-tmp</code></td>
+<td>boolean</td>
+<td>Do not delete temporary files after completion (useful for debugging).</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="hla_concordance">hla_concordance<a class="headerlink" href="#hla_concordance" title="Permanent link">&para;</a></h3>
+<p>Compare HLA typing between two files.</p>
+<p>Files can have one genotype column per gene (A*01:01/02:01) or two allele
+columns (A_1, A_2). Prints a per-gene summary; per-sample scores go to
+--output, or stdout.</p>
+<p>Example:
+    c4 hla_concordance wes.csv imputed.csv \
+        --file1_id sample_id --file2_id sample_id \
+        --output concordance.tsv</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 hla_concordance [OPTIONS] FILE1 FILE2
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output</code>, <code>-o</code></td>
+<td>path</td>
+<td>Output file for per-sample results (.csv, .tsv or .txt). Default: print to stdout.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>text</td>
+<td>Genes to compare, separated by commas (no spaces). Default: every canonical HLA gene in both files.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--file1_id</code></td>
+<td>text</td>
+<td>ID column name in file 1</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--file2_id</code></td>
+<td>text</td>
+<td>ID column name in file 2</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--digits</code>, <code>-d</code></td>
+<td>integer</td>
+<td>Compare at this resolution, e.g. 4 for 2-field</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="liftover">liftover<a class="headerlink" href="#liftover" title="Permanent link">&para;</a></h3>
+<p>Lift variant positions in a file to another genome build.</p>
+<p>Uses pyliftover; no R needed. A .bed file's first three columns are used
+(0-based, as BED is). For other files give --chrom-col and --start-col;
+positions are taken as 1-based unless --zero-based. Output is a 3-column
+BED file in the input's order. Rows that can't be lifted (not in the new
+build, mapping to several places, or a region that splits) are written to
+OUTPUT.unmapped with the reason.</p>
+<p>Examples:
+    c4 liftover hg19ToHg38.over.chain variants.bed variants_hg38.bed
+    c4 liftover hg19ToHg38.over.chain variants.txt variants_hg38.bed --chrom-col 0 --start-col 1</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 liftover [OPTIONS] CHAIN_FILE INPUT_FILE OUTPUT_BED
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--chrom-col</code></td>
+<td>integer</td>
+<td>0-indexed chromosome column (required unless the input is .bed)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--start-col</code></td>
+<td>integer</td>
+<td>0-indexed position column (required unless the input is .bed)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--end-col</code></td>
+<td>integer</td>
+<td>0-indexed end column, for regions. Default: each row is the single base at --start-col.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--zero-based</code></td>
+<td>boolean</td>
+<td>Table positions are 0-based (BED-style). Default: 1-based, as in VCFs. .bed input is always 0-based.</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="merge-hla">merge-hla<a class="headerlink" href="#merge-hla" title="Permanent link">&para;</a></h3>
+<p>Merge separate allele columns back into HLA genotype columns.</p>
+<p>Example:
+    c4 merge-hla input.csv output.csv --genes A B C DRB1 --sep ","</p>
+<p>Converts columns like "DRB1_1" and "DRB1_2" back into "DRB1" with "01:01/02:02"</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 merge-hla [OPTIONS] INPUT_FILE [OUTPUT_FILE]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>text</td>
+<td>Gene to include. Must separate by commas (no spaces).</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--digits</code>, <code>-d</code></td>
+<td>integer</td>
+<td>Resolution in digits (e.g., 4 for 2-field)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--columns</code>, <code>-c</code></td>
+<td>text</td>
+<td>Non-gene columns to include. Will ONLY include these + gene columns in output. Must be separated by commas (no spaces).</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--format</code>, <code>-f</code></td>
+<td>text</td>
+<td>The output text format. Options are: standard (A<em>01:02/03:04), standard2 (A</em>01:02/A*03:04), standard_no_gene (01:02/03:04).</td>
+<td><code>standard</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="prs">prs<a class="headerlink" href="#prs" title="Permanent link">&para;</a></h3>
+<p>Test a weighted polygenic risk score (PRS) for survival association.</p>
+<p>The weights file is a headerless 3-column TSV: variant_id (chr:bp:ref:alt or
+chr:bp:ref&gt;alt), effect_allele, and effect (additive beta). The PRS is the
+weighted sum of effect-allele dosages, standardised to report HR per SD.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 prs --dataset COHORT --weights prs.tsv --survival OS
+
+c4 prs --dataset COHORT --weights prs.tsv --survival OS \
+    --weight-build b37 --gt-build b38 --chain-file hg19ToHg38.chain \
+    --quantiles 5 --output-dir prs_OS/
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 prs [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dataset</code>, <code>-d</code></td>
+<td>text</td>
+<td>Cohort name; it needs a survival: block in the data catalog (c4/catalog.yaml)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--weights</code>, <code>-w</code></td>
+<td>path</td>
+<td>Headerless 3-column TSV: variant_id, effect_allele, effect</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--weight-build</code></td>
+<td>text</td>
+<td>Genome build of the weight variants (b37 or b38)</td>
+<td><code>b38</code></td>
+</tr>
+<tr>
+<td><code>--gt-build</code></td>
+<td>text</td>
+<td>Genome build of the genotype VCF (b37 or b38). Defaults to the dataset's build.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--chain-file</code></td>
+<td>path</td>
+<td>Liftover chain file (required when weight-build != gt-build)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--survival</code></td>
+<td>text</td>
+<td>Survival endpoint (e.g. OS, PFS)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--keep-ambiguous</code> / <code>--drop-ambiguous</code></td>
+<td>boolean</td>
+<td>Keep palindromic (A/T, C/G) SNPs (default: drop them)</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--quantiles</code></td>
+<td>integer</td>
+<td>If &gt;1, also report HR of top vs bottom PRS quantile (e.g. 5)</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>--output-dir</code>, <code>-o</code></td>
+<td>path</td>
+<td>Output directory (created if needed). Writes individual PRS, a log, a PRS histogram, per-variant table, and (with --quantiles) a KM plot.</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--dosage</code> / <code>--no-dosage</code></td>
+<td>boolean</td>
+<td>Use DS dosage field (default) vs GT-derived dosage</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>--tmpdir</code></td>
+<td>path</td>
+<td>Directory for intermediate files (default: $TMPDIR)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--verbose</code> / <code>--no-verbose</code></td>
+<td>boolean</td>
+<td>Show per-variant matching detail</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--save-dosages</code></td>
+<td>boolean</td>
+<td>Also write the weight variants' dosages to prs_dosages.tsv in the output directory (ALT-coded as in the weights file), plus prs_dosages.variants.tsv.</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="split-hla">split-hla<a class="headerlink" href="#split-hla" title="Permanent link">&para;</a></h3>
+<p>Split HLA genotype columns into separate allele columns.</p>
+<p>Example:
+    c4 split-hla input.csv output.csv --genes A B C DRB1 --sep ","</p>
+<p>Converts columns like "DRB1" with "01:01/02:02" into:
+- DRB1_1: "01:01"
+- DRB1_2: "02:02"</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 split-hla [OPTIONS] INPUT_FILE [OUTPUT_FILE]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--genes</code>, <code>-g</code></td>
+<td>text</td>
+<td>Gene to include. Must separate by commas (no spaces).</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--digits</code>, <code>-d</code></td>
+<td>integer</td>
+<td>Resolution in digits (e.g., 4 for 2-field)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--columns</code>, <code>-c</code></td>
+<td>text</td>
+<td>Non-gene columns to include. Will ONLY include these + gene columns in output. Must be separated by commas (no spaces).</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--format</code>, <code>-f</code></td>
+<td>text</td>
+<td>The output text format. Options are: standard (A<em>01:02/03:04), standard2 (A</em>01:02/A*03:04), standard_no_gene (01:02/03:04).</td>
+<td><code>standard</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="survival">survival<a class="headerlink" href="#survival" title="Permanent link">&para;</a></h3>
+<p>Run Cox PH survival analysis for one or more variants.</p>
+<p>IMPORTANT: quote any 'ref&gt;alt' variant on the command line — an unquoted
+'&gt;' is redirection to your shell, and it will silently send this
+command's output to a file named after the ALT allele instead of
+running the analysis (e.g. --variants 2:8599331:T&gt;C with no quotes
+creates/overwrites a file called "C"). Either quote it
+(--variants '2:8599331:T&gt;C') or use the colon-delimited form, which
+needs no quoting (--variants 2:8599331:T:C).</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 survival --dataset COHORT --variants '4:1455432:A&gt;T' --survival OS
+
+c4 survival --dataset COHORT --variant-list vars.txt --survival OS --output results.tsv
+
+c4 survival --dataset COHORT --variants '4:1455432:A&gt;T' --survival OS --km-plot km.png
+
+c4 survival --dataset COHORT --variants '4:1455432:A&gt;T' --survival OS --km-plot km.png --km-plot-carrier
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 survival [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dataset</code>, <code>-d</code></td>
+<td>text</td>
+<td>Cohort name; it needs a survival: block in the data catalog (c4/catalog.yaml)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--variants</code>, <code>-v</code></td>
+<td>text</td>
+<td>Variant(s) in 'chr:pos:ref&gt;alt' format. ALWAYS quote the value — unquoted '&gt;' is redirection to your shell and will silently dump output to a file named after the ALT allele instead of running the command. Repeat the flag for multiple: --variants '4:1234:A&gt;G' --variants '6:5678:C&gt;T'. Alternatively use the colon-delimited form (chr:pos:ref:alt), which needs no quoting, e.g. --variants 4:1234:A:G</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--variant-list</code></td>
+<td>path</td>
+<td>File with one variant per line (implies TSV output)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--variant-build</code></td>
+<td>text</td>
+<td>Genome build of the input variants (e.g. b37, b38)</td>
+<td><code>b38</code></td>
+</tr>
+<tr>
+<td><code>--survival</code></td>
+<td>text</td>
+<td>Survival endpoint (e.g. OS, PFS)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--output</code>, <code>-o</code></td>
+<td>path</td>
+<td>Output TSV path (required when using --variant-list)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--dosage</code> / <code>--no-dosage</code></td>
+<td>boolean</td>
+<td>Use DS dosage field (default) vs GT-derived dosage</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>--tmpdir</code></td>
+<td>path</td>
+<td>Directory for intermediate files (default: $TMPDIR)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--verbose</code> / <code>--no-verbose</code></td>
+<td>boolean</td>
+<td>Show full table (VCF ID, N, events); default shows variant, HR, p, MAF, notes only</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--km-plot</code></td>
+<td>path</td>
+<td>Write a Kaplan-Meier plot (PNG) for this variant. Only valid when exactly one variant is given.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--km-plot-carrier</code></td>
+<td>boolean</td>
+<td>With --km-plot, plot just two curves — carrier (&gt;=1 copy) vs non-carrier — instead of one curve per genotype. Useful for rare alleles where the homozygous-alt group is empty or tiny.</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--save-dosages</code></td>
+<td>path</td>
+<td>Also write the variants' dosages to this TSV (one row per sample, one column per variant), plus NAME.variants.tsv with how each variant matched.</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="vcf-overlap">vcf-overlap<a class="headerlink" href="#vcf-overlap" title="Permanent link">&para;</a></h3>
+<p>Find overlapping variants between two VCF files.</p>
+<p>Both VCF files must be indexed (.csi or .tbi). Files are automatically
+ordered by size (smaller loaded into memory, larger streamed).</p>
+<p>Example:
+    c4 vcf-overlap array.vcf.gz imputed.vcf.gz overlap.tsv
+    c4 vcf-overlap array.vcf.gz imputed.vcf.gz overlap.tsv --no-allele
+    c4 vcf-overlap array.vcf.gz imputed.vcf.gz overlap.tsv --remove-dup</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 vcf-overlap [OPTIONS] VCF1 VCF2 OUTPUT
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--on-allele</code>, <code>-a</code> / <code>--no-allele</code>, <code>-A</code></td>
+<td>boolean</td>
+<td>Match on REF/ALT in addition to position</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>--remove-dup</code>, <code>-d</code></td>
+<td>boolean</td>
+<td>Remove duplicate positions</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../hla/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HLA calls">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                HLA calls
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../reference/cohort/" class="md-footer__link md-footer__link--next" aria-label="Next: c4.cohort">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                c4.cohort
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "toc.follow", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
