@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://williamscole.github.io/c4-docs/data/catalog/">
       
       
-        <link rel="prev" href="../ids/">
+        <link rel="prev" href="../dosages/">
       
       
         <link rel="next" href="../troubleshooting/">
@@ -372,6 +372,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -561,6 +589,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#survival-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Survival settings
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -611,9 +650,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/cohort/" class="md-nav__link">
+    
+    
+    
+    
+      
         
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -627,7 +682,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -785,6 +912,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#survival-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Survival settings
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -826,6 +964,8 @@ without editing the file, for example to test against a copy of the data:</p>
 <span class="nt">resources</span><span class="p">:</span><span class="w">                      </span><span class="c1"># shared reference files, not tied to a cohort</span>
 <span class="w">  </span><span class="nt">chain_hg19_to_hg38</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ref/hg19ToHg38.over.chain</span>
+<span class="w">    </span><span class="nt">from_build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b37</span>
+<span class="w">    </span><span class="nt">to_build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b38</span>
 
 <span class="nt">cohorts</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">demo</span><span class="p">:</span><span class="w">                         </span><span class="c1"># one block per cohort</span>
@@ -904,9 +1044,9 @@ is a table, used through <code>.load()</code>.</p>
 <span class="w">          </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">panel</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">european</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">african</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">asian</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">multiethnic</span><span class="p p-Indicator">]}</span>
 <span class="w">          </span><span class="nt">defaults</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">panel</span><span class="p">:</span><span class="w"> </span><span class="nv">european</span><span class="p p-Indicator">}</span>
 
-<span class="w">    </span><span class="nt">survival</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">survival</span><span class="p">:</span><span class="w">                       </span><span class="c1"># used by `c4 survival` / `c4 prs --dataset demo`</span>
 <span class="w">      </span><span class="nt">dna</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">imputed</span><span class="w">                  </span><span class="c1"># which dna: entry holds the dosages</span>
-<span class="w">      </span><span class="nt">pheno</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">      </span><span class="nt">tables</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">pheno</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pcs</span><span class="p p-Indicator">]</span><span class="w">          </span><span class="c1"># merged on patient_id; the first defines the study population</span>
 <span class="w">      </span><span class="nt">covariates</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PC1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">PC2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">PC3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">female</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">age</span><span class="p p-Indicator">]</span>
 <span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">OS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="nv">OS_mo</span><span class="p p-Indicator">,</span><span class="nt"> event</span><span class="p">:</span><span class="w"> </span><span class="nv">OS_event</span><span class="p p-Indicator">}</span>
@@ -1024,6 +1164,49 @@ date in data file names (<code>demo_pheno_2025-01-15.tsv</code>) to make this ob
 
 <span class="n">resource_path</span><span class="p">(</span><span class="s2">"chain_hg19_to_hg38"</span><span class="p">)</span>
 </code></pre></div>
+<p>Liftover chains also carry <code>from_build</code> and <code>to_build</code>. The survival and PRS
+commands use them to lift variants given in one build onto genotype data in
+another, so <code>c4 survival --variant-build b37</code> against a b38 VCF finds the
+hg19→hg38 chain without a <code>--chain-file</code>. <code>liftover_chains()</code> lists them:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">liftover_chains</span>
+
+<span class="n">liftover_chains</span><span class="p">()</span>   <span class="c1"># {("b37", "b38"): .../hg19ToHg38.over.chain, ...}</span>
+</code></pre></div>
+<h2 id="survival-settings">Survival settings<a class="headerlink" href="#survival-settings" title="Permanent link">&para;</a></h2>
+<p>A cohort's <code>survival:</code> block makes it available to <code>c4 survival --dataset</code> and
+<code>c4 prs --dataset</code>, and to <code>Survival.from_cohort()</code> in Python:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dna</code></td>
+<td>The <code>dna:</code> entry holding the dosages, e.g. <code>imputed</code>. Its VCF sample names are matched to patients through the id_map's <code>&lt;dna&gt;_id</code> column (<code>imputed_id</code>).</td>
+</tr>
+<tr>
+<td><code>tables</code></td>
+<td>Tables merged on <code>patient_id</code> to supply outcomes and covariates. The first one defines who is in the study. Default <code>[pheno]</code>.</td>
+</tr>
+<tr>
+<td><code>covariates</code></td>
+<td>Columns adjusted for in every model. Columns starting with <code>PC</code> are standardised.</td>
+</tr>
+<tr>
+<td><code>endpoints</code></td>
+<td><code>{name: {time: &lt;column&gt;, event: &lt;column&gt;}}</code>, chosen with <code>--survival</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Patients marked <code>drop=1</code> in the ID map are left out, as everywhere else. A
+<code>qc_note</code> on its own doesn't remove anyone.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.survival</span><span class="w"> </span><span class="kn">import</span> <span class="n">Survival</span>
+
+<span class="n">surv</span> <span class="o">=</span> <span class="n">Survival</span><span class="o">.</span><span class="n">from_cohort</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">)</span>
+</code></pre></div>
 
 
 
@@ -1059,7 +1242,7 @@ date in data file names (<code>demo_pheno_2025-01-15.tsv</code>) to make this ob
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../ids/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How IDs link">
+          <a href="../dosages/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Extracting variants">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1069,7 +1252,7 @@ date in data file names (<code>demo_pheno_2025-01-15.tsv</code>) to make this ob
                 Previous
               </span>
               <div class="md-ellipsis">
-                How IDs link
+                Extracting variants
               </div>
             </div>
           </a>

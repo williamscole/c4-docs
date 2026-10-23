@@ -375,6 +375,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../catalog/" class="md-nav__link">
         
   
@@ -528,9 +556,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/cohort/" class="md-nav__link">
+    
+    
+    
+    
+      
         
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -544,7 +588,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -680,6 +796,11 @@ keep for each patient, and merge yourself, or fix the file.</p>
 </code></pre></div>
 <p>The same sample is assigned to two patients in the ID map. One of them is
 wrong; fix the map (and its build script).</p>
+<div class="highlight"><pre><span></span><code>ValueError: id_map .../demo_id_map.tsv column 'drop' must be 1, 0 or blank; found ['yes'].
+</code></pre></div>
+<p>The ID map's <code>drop</code> column has a value c4 doesn't understand. Use <code>1</code> to drop
+a patient, and leave it blank (or <code>0</code>) otherwise. Put any explanation in
+<code>qc_note</code>.</p>
 <div class="highlight"><pre><span></span><code>ValueError: 'pcs' needs `id: {column: ..., type: ...}` in the catalog, with type one of ('patient', 'exome', 'array', 'imputed') (got column='IID', type='TODO').
 </code></pre></div>
 <p>The catalog entry doesn't say what kind of ID the table uses yet. Fill in
@@ -691,11 +812,13 @@ loaded. Build one (<a href="../ids/#rules-for-an-id-map">How IDs link</a>) and a
 <h2 id="a-merge-has-fewer-patients-than-expected">A merge has fewer patients than expected<a class="headerlink" href="#a-merge-has-fewer-patients-than-expected" title="Permanent link">&para;</a></h2>
 <p>Read the merge report. Each <code>+</code> line says how many patients from the first
 table that table matched:</p>
-<div class="highlight"><pre><span></span><code>  pheno.main                      8 patients
-+ pcs                             6 matched   (2 without)
-+ hla.hlahd.standardized          6 matched   (2 without)
+<div class="highlight"><pre><span></span><code>  pheno.main                      7 patients
++ pcs                             5 matched   (2 without)
++ hla.hlahd.standardized          5 matched   (2 without)
 </code></pre></div>
-<p>If a number is much lower than you expected, load that table alone and look at
+<p>Patients marked <code>drop=1</code> in the ID map are left out of every table, and
+<code>.load()</code> prints a line saying how many. If a number is much lower than you
+expected, load that table alone and look at
 how many of its rows got a <code>patient_id</code>. The usual causes are a wrong <code>id:
 type</code> in the catalog, or sample names in the file that don't match the ID map
 (a suffix, a different prefix, leading zeros).</p>
@@ -751,13 +874,13 @@ type</code> in the catalog, or sample names in the file that don't match the ID 
         
         
           
-          <a href="../../reference/cohort/" class="md-footer__link md-footer__link--next" aria-label="Next: API reference">
+          <a href="../../reference/cohort/" class="md-footer__link md-footer__link--next" aria-label="Next: c4.cohort">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                API reference
+                c4.cohort
               </div>
             </div>
             <div class="md-footer__button md-icon">

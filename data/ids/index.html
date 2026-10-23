@@ -16,7 +16,7 @@
         <link rel="prev" href="../loading/">
       
       
-        <link rel="next" href="../catalog/">
+        <link rel="next" href="../dosages/">
       
       
         
@@ -483,6 +483,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../catalog/" class="md-nav__link">
         
   
@@ -545,9 +573,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/cohort/" class="md-nav__link">
+    
+    
+    
+    
+      
         
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -561,7 +605,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -740,24 +856,31 @@ the catalog says which kind of ID it uses. That's all c4 needs to put a
 </tr>
 <tr>
 <td><code>qc_note</code></td>
-<td>Optional: why this patient was flagged in sample QC</td>
+<td>Optional free text for the record, e.g. an old sample ID. Never removes anyone.</td>
+</tr>
+<tr>
+<td><code>drop</code></td>
+<td>Optional: <code>1</code> leaves the patient out of everything loaded; blank or <code>0</code> keeps them.</td>
 </tr>
 </tbody>
 </table>
 <p>A blank cell means that patient has no sample of that type. The demo ID map:</p>
 <div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">id_map</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id exome_id  array_id imputed_id                                       qc_note
-0       P001  EX-0001  ARR-0001   ARR-0001                                           NaN
-1       P002  EX-0002  ARR-0002   ARR-0002                                           NaN
-2       P003  EX-0004  ARR-0003   ARR-0003                                           NaN
-3       P004  EX-0003  ARR-0004   ARR-0004                                           NaN
-4       P005  EX-0005       NaN        NaN                                           NaN
-5       P006  EX-0006  ARR-0006   ARR-0006  sex mismatch (genetic male, recorded female)
-6       P007      NaN  ARR-0007   ARR-0007                                           NaN
-7       P008      NaN       NaN        NaN                                           NaN
+<div class="highlight"><pre><span></span><code>  patient_id exome_id  array_id imputed_id                                       qc_note drop
+0       P001  EX-0001  ARR-0001   ARR-0001                                           NaN  NaN
+1       P002  EX-0002  ARR-0002   ARR-0002                                           NaN  NaN
+2       P003  EX-0004  ARR-0003   ARR-0003                         old exome_id: EX-0003  NaN
+3       P004  EX-0003  ARR-0004   ARR-0004                         old exome_id: EX-0004  NaN
+4       P005  EX-0005       NaN        NaN                                           NaN  NaN
+5       P006  EX-0006  ARR-0006   ARR-0006  sex mismatch (genetic male, recorded female)    1
+6       P007      NaN  ARR-0007   ARR-0007                                           NaN  NaN
+7       P008      NaN       NaN        NaN                                           NaN  NaN
 </code></pre></div>
-<p>P005 has an exome but no array, P007 the reverse, and P008 has no genetic data.</p>
+<p>P005 has an exome but no array, P007 the reverse, and P008 has no genetic data.
+P003 and P004's notes record a sample swap (below). P006 failed a sex check
+and is marked <code>drop=1</code>, so <code>.load()</code> leaves it out
+(<a href="../loading/#dropped-patients-and-qc-notes">Dropped patients and QC notes</a>).</p>
 <h2 id="how-a-table-is-linked">How a table is linked<a class="headerlink" href="#how-a-table-is-linked" title="Permanent link">&para;</a></h2>
 <p>Each table entry in the catalog declares its ID column and its ID type:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">pcs</span><span class="p">:</span>
@@ -808,7 +931,8 @@ from them. Instead the ID map records who each sample really belongs to:</p>
 ...
 </code></pre></div>
 <p>Fixing a swap, or undoing one later, is a two-line edit to the ID map, which
-is tracked in git.</p>
+is tracked in git. The <code>qc_note</code> column is a good place to keep the old
+assignment (<code>old exome_id: EX-0003</code>).</p>
 <h2 id="rules-for-an-id-map">Rules for an ID map<a class="headerlink" href="#rules-for-an-id-map" title="Permanent link">&para;</a></h2>
 <p>c4 checks these when it reads the map, and stops with an error if they're
 broken:</p>
@@ -824,8 +948,9 @@ broken:</p>
 <li><strong>Pick one sample per type per patient.</strong> If someone was sequenced twice,
   choose the sample to use and note the other in the QC record, not as a second
   row.</li>
-<li><strong><code>qc_note</code> is for problems.</strong> <code>exclude_flagged=True</code> drops every patient
-  with <em>any</em> non-empty note, so don't put purely informational notes there.</li>
+<li><strong><code>drop</code> decides who is used; <code>qc_note</code> explains.</strong> Only <code>drop=1</code> removes a
+  patient. Put the reason in <code>qc_note</code>, so anyone who finds a patient missing
+  can see why. <code>drop</code> must be <code>1</code>, <code>0</code> or blank; anything else is an error.</li>
 <li><strong>Generate it with a script or notebook</strong>, and point the catalog's
   <code>built_by</code> field at it, so the reasoning behind each decision can be found.</li>
 </ul>
@@ -891,13 +1016,13 @@ re-imputation that renames samples only needs a new <code>imputed_id</code> colu
         
         
           
-          <a href="../catalog/" class="md-footer__link md-footer__link--next" aria-label="Next: The data catalog">
+          <a href="../dosages/" class="md-footer__link md-footer__link--next" aria-label="Next: Extracting variants">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                The data catalog
+                Extracting variants
               </div>
             </div>
             <div class="md-footer__button md-icon">

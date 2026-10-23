@@ -16,6 +16,8 @@
         <link rel="prev" href="../../data/troubleshooting/">
       
       
+        <link rel="next" href="../genotypes/">
+      
       
         
       
@@ -25,7 +27,7 @@
     
     
       
-        <title>API reference - c4</title>
+        <title>c4.cohort - c4</title>
       
     
     
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API reference
+              c4.cohort
             
           </span>
         </div>
@@ -371,6 +373,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../data/dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../data/catalog/" class="md-nav__link">
         
   
@@ -435,6 +465,60 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -450,7 +534,7 @@
   <span class="md-ellipsis">
     
   
-    API reference
+    c4.cohort
   
 
     
@@ -468,7 +552,7 @@
   <span class="md-ellipsis">
     
   
-    API reference
+    c4.cohort
   
 
     
@@ -554,6 +638,17 @@
     <span class="md-ellipsis">
       
         id_map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.dropped_patients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dropped_patients
       
     </span>
   </a>
@@ -649,6 +744,42 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
   </ul>
 </nav>
@@ -737,6 +868,17 @@
     <span class="md-ellipsis">
       
         id_map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.dropped_patients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dropped_patients
       
     </span>
   </a>
@@ -997,8 +1139,26 @@ therefore always a join on patient_id.</p>
 <div class="doc doc-object doc-function">
 
 
+<h3 id="c4.cohort.Cohort.dropped_patients" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">dropped_patients</span><span class="p">()</span></code>
+
+<a href="#c4.cohort.Cohort.dropped_patients" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>patient_ids marked drop=1 in the id_map (empty if there is no drop column).</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="c4.cohort.Cohort.load" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">load</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">qc_note</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exclude_flagged</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">load</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">qc_note</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_dropped</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></code>
 
 <a href="#c4.cohort.Cohort.load" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -1072,14 +1232,15 @@ its default entry.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>exclude_flagged</code>
+                <code>keep_dropped</code>
             </td>
             <td>
                   <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Drop patients with a non-empty qc_note.</p>
+                <p>Keep patients marked drop=1 in the id_map (they are
+removed by default), and add the id_map's drop column.</p>
               </div>
             </td>
             <td>
@@ -1095,7 +1256,7 @@ its default entry.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Print a merge report and notes about unlinked rows.</p>
+                <p>Print a merge report and notes about unlinked or dropped rows.</p>
               </div>
             </td>
             <td>
@@ -1367,6 +1528,22 @@ file is taken relative to the catalog file itself.</p>
             </div>
           </a>
         
+        
+          
+          <a href="../genotypes/" class="md-footer__link md-footer__link--next" aria-label="Next: c4.genotypes">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                c4.genotypes
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

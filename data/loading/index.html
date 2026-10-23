@@ -446,10 +446,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qc-notes" class="md-nav__link">
+  <a href="#dropped-patients-and-qc-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        QC notes
+        Dropped patients and QC notes
       
     </span>
   </a>
@@ -533,6 +533,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../catalog/" class="md-nav__link">
         
   
@@ -595,9 +623,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../reference/cohort/" class="md-nav__link">
+    
+    
+    
+    
+      
         
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -611,7 +655,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -710,10 +826,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qc-notes" class="md-nav__link">
+  <a href="#dropped-patients-and-qc-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        QC notes
+        Dropped patients and QC notes
       
     </span>
   </a>
@@ -814,37 +930,36 @@ in a notebook, or <code>print(demo)</code>). Pass <code>show=False</code> to <co
 <h2 id="load-a-table">Load a table<a class="headerlink" href="#load-a-table" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">pheno</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id                                       qc_note    ID  age  female site  OS_mo  OS_event
-0       P001                                           NaN  P001   64       0    A   31.2         1
-1       P002                                           NaN  P002   58       1    A   44.0         0
-2       P003                                           NaN  P003   71       1    B   12.5         1
-3       P004                                           NaN  P004   66       0    B   27.9         1
-4       P005                                           NaN  P005   49       1    C   50.1         0
-5       P006  sex mismatch (genetic male, recorded female)  P006   60       1    C    8.4         1
-6       P007                                           NaN  P007   73       0    A   19.0         1
-7       P008                                           NaN  P008   55       0    B   38.6         0
+<div class="highlight"><pre><span></span><code>Left out 1 patient(s) marked drop=1 in the id_map (keep_dropped=True to keep them).
+  patient_id                qc_note    ID  age  female site  OS_mo  OS_event
+0       P001                    NaN  P001   64       0    A   31.2         1
+1       P002                    NaN  P002   58       1    A   44.0         0
+2       P003  old exome_id: EX-0003  P003   71       1    B   12.5         1
+3       P004  old exome_id: EX-0004  P004   66       0    B   27.9         1
+4       P005                    NaN  P005   49       1    C   50.1         0
+5       P007                    NaN  P007   73       0    A   19.0         1
+6       P008                    NaN  P008   55       0    B   38.6         0
 </code></pre></div>
-<p>Every loaded table comes back as a pandas DataFrame with two columns added at
-the front:</p>
-<ul>
-<li><strong><code>patient_id</code></strong>, looked up from the table's own ID column through the
-  cohort's ID map. The original ID column (<code>ID</code> here) is kept.</li>
-<li><strong><code>qc_note</code></strong>, from the ID map: why a patient was flagged during sample QC,
-  or blank. See <a href="#qc-notes">QC notes</a> below.</li>
-</ul>
+<p>Every loaded table comes back as a pandas DataFrame with <code>patient_id</code> added at
+the front, looked up from the table's own ID column through the cohort's ID
+map. The original ID column (<code>ID</code> here) is kept. If the ID map has a
+<code>qc_note</code> column, that is added too.</p>
+<p>The demo has 8 patients but only 7 rows came back: P006 is marked <code>drop=1</code> in
+the ID map, so it is left out of everything you load. See
+<a href="#dropped-patients-and-qc-notes">Dropped patients and QC notes</a>.</p>
 <p>Tables keyed by a genetic ID are linked the same way. The PC file uses array
 IDs:</p>
 <div class="highlight"><pre><span></span><code><span class="n">pcs</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pcs"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Note: 1 of 7 rows in 'pcs' have no patient_id (array ID not in id_map).
-  patient_id                                       qc_note           IID    PC1    PC2    PC3
-0       P001                                           NaN      ARR-0001  0.012 -0.031  0.004
-1       P002                                           NaN      ARR-0002  0.010 -0.028  0.011
-2       P003                                           NaN      ARR-0003 -0.044  0.015 -0.002
-3       P004                                           NaN      ARR-0004  0.009 -0.030  0.007
-4       P006  sex mismatch (genetic male, recorded female)      ARR-0006  0.013 -0.027 -0.009
-5       P007                                           NaN      ARR-0007 -0.051  0.019  0.003
-6        NaN                                           NaN  CTRL-NA12878  0.011 -0.029  0.005
+Left out 1 patient(s) marked drop=1 in the id_map (keep_dropped=True to keep them).
+  patient_id                qc_note           IID    PC1    PC2    PC3
+0       P001                    NaN      ARR-0001  0.012 -0.031  0.004
+1       P002                    NaN      ARR-0002  0.010 -0.028  0.011
+2       P003  old exome_id: EX-0003      ARR-0003 -0.044  0.015 -0.002
+3       P004  old exome_id: EX-0004      ARR-0004  0.009 -0.030  0.007
+4       P007                    NaN      ARR-0007 -0.051  0.019  0.003
+5        NaN                    NaN  CTRL-NA12878  0.011 -0.029  0.005
 </code></pre></div>
 <p><code>CTRL-NA12878</code> is a control sample, not a patient, so it isn't in the ID map.
 It is kept with an empty <code>patient_id</code>, and the note tells you it happened.</p>
@@ -854,12 +969,12 @@ HIBAG calls, for instance, exist for each reference panel. Pass the parameter
 by name:</p>
 <div class="highlight"><pre><span></span><code><span class="n">hibag</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"hla.hibag"</span><span class="p">,</span> <span class="n">panel</span><span class="o">=</span><span class="s2">"african"</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id qc_note sample.id    A_1    A_2  prob_A
-0       P001     NaN  ARR-0001  02:01  24:02    0.97
-1       P002     NaN  ARR-0002  01:01  03:01    0.99
-2       P003     NaN  ARR-0003  11:01  24:02    0.88
-3       P004     NaN  ARR-0004  02:01  02:01    0.95
-4       P007     NaN  ARR-0007  30:01  33:03    0.71
+<div class="highlight"><pre><span></span><code>  patient_id                qc_note sample.id    A_1    A_2  prob_A
+0       P001                    NaN  ARR-0001  02:01  24:02    0.97
+1       P002                    NaN  ARR-0002  01:01  03:01    0.99
+2       P003  old exome_id: EX-0003  ARR-0003  11:01  24:02    0.88
+3       P004  old exome_id: EX-0004  ARR-0004  02:01  02:01    0.95
+4       P007                    NaN  ARR-0007  30:01  33:03    0.71
 </code></pre></div>
 <p>Leave the parameter out and its default is used (<code>european</code> here). An invalid
 value raises an error that lists the valid ones.</p>
@@ -874,28 +989,29 @@ elsewhere in c4. <code>prob_A</code> is kept as is.</p>
 <div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="s2">"pcs"</span><span class="p">,</span> <span class="s2">"hla.hlahd"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Note: 1 of 7 rows in 'pcs' have no patient_id (array ID not in id_map).
-  pheno.main                      8 patients
+Left out 1 patient(s) marked drop=1 in the id_map (keep_dropped=True to keep them).
+  pheno.main                      7 patients
   (1 row(s) of pcs without a patient_id dropped before merging)
-+ pcs                             6 matched   (2 without)
-+ hla.hlahd.standardized          6 matched   (2 without)
-= 8 rows (left join on patient_id)
++ pcs                             5 matched   (2 without)
++ hla.hlahd.standardized          5 matched   (2 without)
+= 7 rows (left join on patient_id)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[[</span><span class="s2">"patient_id"</span><span class="p">,</span> <span class="s2">"qc_note"</span><span class="p">,</span> <span class="s2">"OS_mo"</span><span class="p">,</span> <span class="s2">"IID"</span><span class="p">,</span> <span class="s2">"PC1"</span><span class="p">,</span> <span class="s2">"seqID"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]]</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  patient_id                                       qc_note  OS_mo       IID    PC1    seqID              A
-0       P001                                           NaN   31.2  ARR-0001  0.012  EX-0001  A*02:01/24:02
-1       P002                                           NaN   44.0  ARR-0002  0.010  EX-0002  A*01:01/03:01
-2       P003                                           NaN   12.5  ARR-0003 -0.044  EX-0004  A*11:01/24:02
-3       P004                                           NaN   27.9  ARR-0004  0.009  EX-0003  A*02:01/02:01
-4       P005                                           NaN   50.1       NaN    NaN  EX-0005  A*03:01/68:01
-5       P006  sex mismatch (genetic male, recorded female)    8.4  ARR-0006  0.013  EX-0006  A*01:01/02:01
-6       P007                                           NaN   19.0  ARR-0007 -0.051      NaN            NaN
-7       P008                                           NaN   38.6       NaN    NaN      NaN            NaN
+<div class="highlight"><pre><span></span><code>  patient_id                qc_note  OS_mo       IID    PC1    seqID              A
+0       P001                    NaN   31.2  ARR-0001  0.012  EX-0001  A*02:01/24:02
+1       P002                    NaN   44.0  ARR-0002  0.010  EX-0002  A*01:01/03:01
+2       P003  old exome_id: EX-0003   12.5  ARR-0003 -0.044  EX-0004  A*11:01/24:02
+3       P004  old exome_id: EX-0004   27.9  ARR-0004  0.009  EX-0003  A*02:01/02:01
+4       P005                    NaN   50.1       NaN    NaN  EX-0005  A*03:01/68:01
+5       P007                    NaN   19.0  ARR-0007 -0.051      NaN            NaN
+6       P008                    NaN   38.6       NaN    NaN      NaN            NaN
 </code></pre></div>
 <p>The PCs and HLA calls came from different ID systems (array and exome), but
 both landed on the right patients. Notice that P003 got exome <code>EX-0004</code> and
 P004 got <code>EX-0003</code>: those two samples were swapped at sequencing, and the ID
-map corrects it (<a href="../ids/#a-worked-example">How IDs link</a>).</p>
+map corrects it (<a href="../ids/#a-worked-example">How IDs link</a>). Their <code>qc_note</code>
+records the old assignment.</p>
 <h3 id="what-the-merge-does">What the merge does<a class="headerlink" href="#what-the-merge-does" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Starts from the first table</strong> and adds the others with a <strong>left join</strong>, so
@@ -917,20 +1033,35 @@ map corrects it (<a href="../ids/#a-worked-example">How IDs link</a>).</p>
 <p>Parameters apply to whichever tables use them:</p>
 <div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="s2">"hla.hibag"</span><span class="p">,</span> <span class="n">panel</span><span class="o">=</span><span class="s2">"asian"</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="qc-notes">QC notes<a class="headerlink" href="#qc-notes" title="Permanent link">&para;</a></h2>
-<p>The ID map can carry a <code>qc_note</code> for patients flagged during sample QC (a sex
-mismatch, an unresolved identity problem). By default it is added to every
-loaded table so you can see it. Two options:</p>
-<div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="n">exclude_flagged</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># drop patients with any qc_note</span>
-<span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="n">qc_note</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>          <span class="c1"># don't add the column</span>
+<h2 id="dropped-patients-and-qc-notes">Dropped patients and QC notes<a class="headerlink" href="#dropped-patients-and-qc-notes" title="Permanent link">&para;</a></h2>
+<p>The ID map can have two optional columns about sample QC:</p>
+<ul>
+<li><strong><code>drop</code></strong>: <code>1</code> means "don't use this patient". They are left out of every
+  table <code>.load()</code> returns, and out of survival analyses. Blank or <code>0</code> means
+  keep.</li>
+<li><strong><code>qc_note</code></strong>: free text, for the record. It never removes anyone. Use it
+  for things like an old sample ID or why a patient was dropped.</li>
+</ul>
+<p><code>.load()</code> says when it leaves anyone out. To see them, keep them:</p>
+<div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">,</span> <span class="n">keep_dropped</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Excluded 1 row(s) with a qc_note.
+<div class="highlight"><pre><span></span><code>  patient_id                                       qc_note  drop    ID  age  female site  OS_mo  OS_event
+0       P001                                           NaN     0  P001   64       0    A   31.2         1
+1       P002                                           NaN     0  P002   58       1    A   44.0         0
+2       P003                         old exome_id: EX-0003     0  P003   71       1    B   12.5         1
+3       P004                         old exome_id: EX-0004     0  P004   66       0    B   27.9         1
+4       P005                                           NaN     0  P005   49       1    C   50.1         0
+5       P006  sex mismatch (genetic male, recorded female)     1  P006   60       1    C    8.4         1
+6       P007                                           NaN     0  P007   73       0    A   19.0         1
+7       P008                                           NaN     0  P008   55       0    B   38.6         0
 </code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Flagged patients are kept unless you ask</p>
-<p><code>.load()</code> never drops flagged patients on its own. Decide per analysis,
-and use <code>exclude_flagged=True</code> when flagged samples shouldn't be used.</p>
-</div>
+<p>With <code>keep_dropped=True</code> the ID map's <code>drop</code> column is added as well, so you
+can filter later. <code>.dropped_patients()</code> lists who is marked:</p>
+<div class="highlight"><pre><span></span><code><span class="n">demo</span><span class="o">.</span><span class="n">dropped_patients</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>{'P006'}
+</code></pre></div>
+<p><code>qc_note=False</code> leaves the note column out of what you load.</p>
 <h2 id="genetic-data">Genetic data<a class="headerlink" href="#genetic-data" title="Permanent link">&para;</a></h2>
 <p>VCF and PLINK files aren't tables you load into pandas; you hand them to
 bcftools, plink or the c4 commands. <code>.path()</code> gives you the file:</p>
@@ -950,6 +1081,8 @@ IDs for <code>dna.imputed</code>). To connect them to patients, use the ID map:<
 <div class="highlight"><pre><span></span><code><span class="n">ids</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">id_map</span><span class="p">()</span>                                  <span class="c1"># the full table</span>
 <span class="n">to_patient</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ids</span><span class="p">[</span><span class="s2">"imputed_id"</span><span class="p">],</span> <span class="n">ids</span><span class="p">[</span><span class="s2">"patient_id"</span><span class="p">]))</span>
 </code></pre></div>
+<p>To pull a few variants out of the VCFs as a table, with <code>patient_id</code>
+attached, see <a href="../dosages/">Extracting variants</a>.</p>
 <h2 id="data-dictionary">Data dictionary<a class="headerlink" href="#data-dictionary" title="Permanent link">&para;</a></h2>
 <p>If a phenotype table has a data dictionary in the catalog, <code>.describe()</code> looks
 up columns:</p>

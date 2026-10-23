@@ -9,6 +9,10 @@
          <lastmod>2026-10-23</lastmod>
     </url>
     <url>
+         <loc>https://williamscole.github.io/c4-docs/data/dosages/</loc>
+         <lastmod>2026-10-23</lastmod>
+    </url>
+    <url>
          <loc>https://williamscole.github.io/c4-docs/data/ids/</loc>
          <lastmod>2026-10-23</lastmod>
     </url>
@@ -22,6 +26,10 @@
     </url>
     <url>
          <loc>https://williamscole.github.io/c4-docs/reference/cohort/</loc>
+         <lastmod>2026-10-23</lastmod>
+    </url>
+    <url>
+         <loc>https://williamscole.github.io/c4-docs/reference/genotypes/</loc>
          <lastmod>2026-10-23</lastmod>
     </url>
 </urlset>
