@@ -1145,7 +1145,8 @@ Name: A, dtype: int64
 </code></pre></div>
 <p>Save it as a column with <code>hla["A*02:01"] = ...</code>.</p>
 <p>The match is made at the resolution of the allele you ask about, so
-<code>copies_of("A*02:01")</code> also counts <code>A*02:01:01</code>.</p>
+<code>copies_of("A*02:01")</code> also counts <code>A*02:01:01</code>, and <code>copies_of("A*02")</code>
+counts every <code>A*02</code> allele (the 1-field allele group).</p>
 <div class="admonition warning">
 <p class="admonition-title">Rows with no HLA call</p>
 <p>After a merge, patients with no row in the HLA table have <code>NaN</code> in the gene

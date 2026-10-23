@@ -1726,7 +1726,8 @@ either genotype has fewer than <code>digits</code> digits.</p>
         <p>How many of the two alleles match <code>allele</code>: 0, 1 or 2 (NaN if both
 are missing).</p>
 <p>Matching uses the resolution of <code>allele</code>, so <code>copies_of("A*02:01")</code>
-also counts <code>A*02:01:01</code>. Useful as an allele dosage for association
+also counts <code>A*02:01:01</code>, and <code>copies_of("A*02")</code> counts every
+<code>A*02</code> allele. Useful as an allele dosage for association
 tests.</p>
 
 
@@ -1811,8 +1812,9 @@ tests.</p>
             <td>
               <div class="doc-md-description">
                 <p>The allele as text, with or without the gene prefix
-(<code>"A*02:01"</code> or <code>"02:01"</code>). <code>"."</code>, <code>""</code>, <code>"nan"</code> and NaN
-mean missing.</p>
+(<code>"A*02:01"</code> or <code>"02:01"</code>), at any resolution from 1 field
+(<code>"A*02"</code>). <code>"."</code>, <code>""</code>, <code>"nan"</code> and NaN mean missing.
+Anything else that isn't an allele raises ValueError.</p>
               </div>
             </td>
             <td>
