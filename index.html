@@ -886,12 +886,13 @@ unlinked samples are reported rather than skipped.</p>
 </tbody>
 </table>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<p><code>c4</code> needs Python 3.11+, pandas, PyYAML, and pyliftover for variants in
-another genome build. Extracting variants needs bcftools. In a clone of the
-repository:</p>
+<p><code>c4</code> needs Python 3.11+. In a clone of the repository, this installs it and
+every Python package it uses:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-pip<span class="w"> </span>install<span class="w"> </span>pyyaml<span class="w"> </span>pyliftover
 </code></pre></div>
+<p>Add <code>".[dev]"</code> instead of <code>.</code> to also get pytest. Extracting variants and the
+survival/PRS commands also need <strong>bcftools</strong> on your PATH (on C4:
+<code>module load bcftools</code>).</p>
 <p>Then check that the catalog matches what is on disk:</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"from c4.cohort import cohort; cohort('demo').check()"</span>
 </code></pre></div>
