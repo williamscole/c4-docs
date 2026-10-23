@@ -1,0 +1,1127 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Data loading and analysis tools for the C4 cluster">
+      
+      
+      
+      
+        <link rel="prev" href="../ids/">
+      
+      
+        <link rel="next" href="../troubleshooting/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>The data catalog - c4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-data-catalog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="c4" class="md-header__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            c4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The data catalog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="c4" class="md-nav__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    c4
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data loading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data loading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loading and merging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ids/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How IDs link
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The data catalog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The data catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-its-read-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where it's read from
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-demo-catalog-annotated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The demo catalog, annotated
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entry-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templated-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templated files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-edits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common edits
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common edits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-file-to-an-existing-cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a file to an existing cohort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a cohort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-a-file-with-a-newer-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Replace a file with a newer version
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-its-read-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where it's read from
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-demo-catalog-annotated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The demo catalog, annotated
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entry-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templated-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templated files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-edits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common edits
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common edits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-file-to-an-existing-cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a file to an existing cohort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a cohort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-a-file-with-a-newer-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Replace a file with a newer version
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-data-catalog">The data catalog<a class="headerlink" href="#the-data-catalog" title="Permanent link">&para;</a></h1>
+<p>Every data file c4 knows about is listed in one YAML file,
+<code>c4/catalog.yaml</code>, versioned with the code. Code never contains data paths;
+it asks the catalog.</p>
+<h2 id="where-its-read-from">Where it's read from<a class="headerlink" href="#where-its-read-from" title="Permanent link">&para;</a></h2>
+<p>In order:</p>
+<ol>
+<li><code>cohort(name, catalog=...)</code>, if you pass a path (or an already-loaded dict)</li>
+<li>the <code>C4_CATALOG</code> environment variable</li>
+<li><code>c4/catalog.yaml</code> in the package</li>
+</ol>
+<p>Paths in the catalog are relative to its <code>root</code> (unless absolute). A relative
+<code>root</code> is taken relative to the catalog file itself, which is how the demo
+catalog finds <code>examples/demo/data</code>. Set <code>C4_DATA_ROOT</code> to use a different root
+without editing the file, for example to test against a copy of the data:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">C4_DATA_ROOT</span><span class="o">=</span>/scratch/me/data_copy
+</code></pre></div>
+<h2 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">catalog_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/lab</span><span class="w">                 </span><span class="c1"># paths below are relative to this</span>
+
+<span class="nt">resources</span><span class="p">:</span><span class="w">                      </span><span class="c1"># shared reference files, not tied to a cohort</span>
+<span class="w">  </span><span class="nt">chain_hg19_to_hg38</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ref/hg19ToHg38.over.chain</span>
+
+<span class="nt">cohorts</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">demo</span><span class="p">:</span><span class="w">                         </span><span class="c1"># one block per cohort</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">DEMO</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A. Researcher</span>
+<span class="w">    </span><span class="nt">id_map</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">               </span><span class="c1"># links every ID type to patient_id</span>
+<span class="w">    </span><span class="nt">pheno</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">                </span><span class="c1"># phenotype / clinical tables</span>
+<span class="w">    </span><span class="nt">pcs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">                  </span><span class="c1"># principal components</span>
+<span class="w">    </span><span class="nt">hla</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">                  </span><span class="c1"># HLA calls, one block per software</span>
+<span class="w">    </span><span class="nt">dna</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">                  </span><span class="c1"># genetic data, one block per data type</span>
+<span class="w">    </span><span class="nt">survival</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">...</span><span class="p p-Indicator">}</span><span class="w">             </span><span class="c1"># settings for survival analyses</span>
+</code></pre></div>
+<p>Inside a cohort, anything with a <code>path:</code> is an <strong>entry</strong>: one file, or one
+templated family of files. Entries are named by their position, joined with
+dots: <code>pcs</code>, <code>pheno.main</code>, <code>hla.hibag.raw</code>, <code>dna.imputed</code>. That's the name you
+pass to <code>.load()</code> and <code>.path()</code>.</p>
+<p>Entries under <code>dna:</code> are genetic data, used through <code>.path()</code>. Everything else
+is a table, used through <code>.load()</code>.</p>
+<h2 id="the-demo-catalog-annotated">The demo catalog, annotated<a class="headerlink" href="#the-demo-catalog-annotated" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">cohorts</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">demo</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">DEMO</span><span class="p p-Indicator">]</span><span class="w">                 </span><span class="c1"># other names cohort() accepts (case-insensitive)</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A. Researcher</span><span class="w">            </span><span class="c1"># who to ask about this data</span>
+
+<span class="w">    </span><span class="nt">id_map</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/ids/demo_id_map.tsv</span>
+<span class="w">      </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">"\t"</span>
+<span class="w">      </span><span class="nt">built_by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notebooks/resolve_demo_ids.ipynb</span><span class="w">   </span><span class="c1"># how the map was made</span>
+
+<span class="w">    </span><span class="nt">pheno</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w">                 </span><span class="c1"># "pheno" on its own means "pheno.main"</span>
+<span class="w">      </span><span class="nt">main</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/pheno/demo_pheno_2025-01-15.tsv</span>
+<span class="w">        </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">"\t"</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">column</span><span class="p">:</span><span class="w"> </span><span class="nv">ID</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">patient</span><span class="p p-Indicator">}</span>
+<span class="w">        </span><span class="nt">data_dict</span><span class="p">:</span><span class="w">                  </span><span class="c1"># used by .describe()</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/pheno/demo_data_dictionary.txt</span>
+<span class="w">          </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markdown</span>
+<span class="w">          </span><span class="nt">term_col</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable</span>
+<span class="w">          </span><span class="nt">def_col</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Description</span>
+<span class="w">          </span><span class="nt">type_col</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Type</span>
+
+<span class="w">    </span><span class="nt">pcs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/pca/demo_array_pruned.eigenvec</span>
+<span class="w">      </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">"\t"</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">column</span><span class="p">:</span><span class="w"> </span><span class="nv">IID</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">array</span><span class="p p-Indicator">}</span>
+
+<span class="w">    </span><span class="nt">dna</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">imputed</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/dna/chr{chrom}.dose.vcf.gz</span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vcf</span>
+<span class="w">        </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b38</span>
+<span class="w">        </span><span class="nt">imputed_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span><span class="w">         </span><span class="c1"># imputed_id should equal array_id (checked)</span>
+<span class="w">        </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">chrom</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">13</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">17</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">19</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">22</span><span class="p p-Indicator">]}</span>
+<span class="w">      </span><span class="nt">exome</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TODO</span><span class="w">                  </span><span class="c1"># known to exist, not added yet</span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TODO</span>
+<span class="w">        </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TODO</span>
+
+<span class="w">    </span><span class="nt">hla</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">hlahd</span><span class="p">:</span><span class="w">                        </span><span class="c1"># one block per HLA caller</span>
+<span class="w">        </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exome</span>
+<span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standardized</span>
+<span class="w">        </span><span class="nt">standardized</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/hla/hlahd_calls_standardized.tsv</span>
+<span class="w">          </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">"\t"</span>
+<span class="w">          </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">column</span><span class="p">:</span><span class="w"> </span><span class="nv">seqID</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">exome</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">hibag</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">        </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raw</span>
+<span class="w">        </span><span class="nt">raw</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"demo/hla/hibag_{panel}.csv"</span>
+<span class="w">          </span><span class="nt">sep</span><span class="p">:</span><span class="w"> </span><span class="s">","</span>
+<span class="w">          </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">column</span><span class="p">:</span><span class="w"> </span><span class="nv">sample.id</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">array</span><span class="p p-Indicator">}</span>
+<span class="w">          </span><span class="nt">loader</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HIBAG</span>
+<span class="w">          </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">panel</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">european</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">african</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">asian</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">multiethnic</span><span class="p p-Indicator">]}</span>
+<span class="w">          </span><span class="nt">defaults</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">panel</span><span class="p">:</span><span class="w"> </span><span class="nv">european</span><span class="p p-Indicator">}</span>
+
+<span class="w">    </span><span class="nt">survival</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">dna</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">imputed</span><span class="w">                  </span><span class="c1"># which dna: entry holds the dosages</span>
+<span class="w">      </span><span class="nt">pheno</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">      </span><span class="nt">covariates</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">PC1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">PC2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">PC3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">female</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">age</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">OS</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="nv">OS_mo</span><span class="p p-Indicator">,</span><span class="nt"> event</span><span class="p">:</span><span class="w"> </span><span class="nv">OS_event</span><span class="p p-Indicator">}</span>
+</code></pre></div>
+<h2 id="entry-fields">Entry fields<a class="headerlink" href="#entry-fields" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Used for</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>all</td>
+<td>Relative to <code>root</code>, or absolute. <code>TODO</code> means "exists, not added yet". May contain <code>{placeholders}</code>.</td>
+</tr>
+<tr>
+<td><code>sep</code></td>
+<td>tables</td>
+<td>Column separator. Default tab. Write <code>"\t"</code> in double quotes and regexes like <code>'\s+'</code> in single quotes.</td>
+</tr>
+<tr>
+<td><code>header</code></td>
+<td>tables</td>
+<td>Header row number. Default <code>0</code>.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>tables</td>
+<td><code>{column: &lt;name&gt;, type: patient \| exome \| array \| imputed}</code>. Required for <code>.load()</code>.</td>
+</tr>
+<tr>
+<td><code>loader</code></td>
+<td>tables</td>
+<td><code>standard</code> (default), <code>HLA-HD</code>, or <code>HIBAG</code>.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>templated files</td>
+<td>Allowed values for each placeholder, e.g. <code>{panel: [european, african]}</code>.</td>
+</tr>
+<tr>
+<td><code>defaults</code></td>
+<td>templated files</td>
+<td>Value used when a placeholder isn't passed.</td>
+</tr>
+<tr>
+<td><code>data_dict</code></td>
+<td>phenotype tables</td>
+<td>Data dictionary for <code>.describe()</code>: <code>path</code>, <code>format</code> (<code>markdown</code> or <code>space_delim</code> for <code>.txt</code>), <code>term_col</code>, <code>def_col</code>, optional <code>type_col</code>.</td>
+</tr>
+<tr>
+<td><code>format</code>, <code>build</code></td>
+<td>genetic data</td>
+<td>Shown in the table, e.g. <code>vcf</code>, <code>b38</code>.</td>
+</tr>
+<tr>
+<td><code>imputed_from</code></td>
+<td>genetic data</td>
+<td>The data type an imputed set was made from; <code>.check()</code> confirms the IDs match.</td>
+</tr>
+<tr>
+<td><code>source</code>, <code>description</code>, <code>built_by</code></td>
+<td>anything</td>
+<td>Free text for people. c4 doesn't use them.</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>group</strong> (a block without a <code>path</code>, like <code>pheno</code> or <code>hla.hibag</code>) can have a
+<code>default:</code> naming one of its entries, so the short name loads it.</p>
+<h2 id="templated-files">Templated files<a class="headerlink" href="#templated-files" title="Permanent link">&para;</a></h2>
+<p>Use <code>{placeholder}</code> in a path for files that differ by one value, and list the
+allowed values under <code>params</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo/dna/chr{chrom}.dose.vcf.gz</span>
+<span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">chrom</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">...</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">22</span><span class="p p-Indicator">]}</span>
+</code></pre></div>
+<p><code>.path("dna.imputed", chrom=6)</code> fills it in, and <code>.paths("dna.imputed")</code> gives
+all of them. A placeholder with a <code>defaults</code> value can be left out. The status
+column and <code>.check()</code> test every combination.</p>
+<div class="admonition warning">
+<p class="admonition-title">Quote paths that start with <code>{</code></p>
+<p>In YAML, a value beginning with <code>{</code> is read as a mapping. Write
+<code>path: "{panel}_calls.csv"</code> with quotes. Paths with the placeholder later on
+(<code>demo/chr{chrom}.vcf.gz</code>) are fine unquoted.</p>
+</div>
+<h2 id="common-edits">Common edits<a class="headerlink" href="#common-edits" title="Permanent link">&para;</a></h2>
+<h3 id="add-a-file-to-an-existing-cohort">Add a file to an existing cohort<a class="headerlink" href="#add-a-file-to-an-existing-cohort" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Add an entry in the right section with <code>path</code>, <code>sep</code> and <code>id</code>.</li>
+<li>If it needs special parsing, set <code>loader</code>.</li>
+<li>Run <code>cohort("&lt;name&gt;").check()</code>.</li>
+</ol>
+<h3 id="add-a-cohort">Add a cohort<a class="headerlink" href="#add-a-cohort" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Build its ID map (one row per patient; see <a href="../ids/#rules-for-an-id-map">How IDs link</a>).</li>
+<li>Copy an existing cohort block, rename it, and fill in what exists. Leave
+   anything you don't have yet as <code>TODO</code> rather than deleting it, so the gap is
+   visible.</li>
+<li>Run <code>.check()</code>.</li>
+</ol>
+<h3 id="move-data">Move data<a class="headerlink" href="#move-data" title="Permanent link">&para;</a></h3>
+<p>Change the paths (or <code>root</code>, if everything moved together), run <code>.check()</code>,
+and commit. No code changes.</p>
+<h3 id="replace-a-file-with-a-newer-version">Replace a file with a newer version<a class="headerlink" href="#replace-a-file-with-a-newer-version" title="Permanent link">&para;</a></h3>
+<p>Point <code>path</code> at the new file and commit. The git history keeps a record of
+which version was current when, so older analyses can still be traced. Put a
+date in data file names (<code>demo_pheno_2025-01-15.tsv</code>) to make this obvious.</p>
+<h2 id="shared-resources">Shared resources<a class="headerlink" href="#shared-resources" title="Permanent link">&para;</a></h2>
+<p>Files that aren't specific to a cohort, like liftOver chain files or the
+1000 Genomes panel table, go under <code>resources:</code> and are fetched by name:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource_path</span>
+
+<span class="n">resource_path</span><span class="p">(</span><span class="s2">"chain_hg19_to_hg38"</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ids/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How IDs link">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How IDs link
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Troubleshooting
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "toc.follow", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
