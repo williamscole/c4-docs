@@ -608,6 +608,33 @@
   
   
     <li class="md-nav__item">
+      <a href="finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="cli/" class="md-nav__link">
         
   
@@ -648,10 +675,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -669,8 +696,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -751,6 +778,34 @@
     
   
     c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.finemap
   
 
     
@@ -863,7 +918,7 @@
 pages cover its <strong>data loading</strong> layer: one catalog file that lists every
 dataset the lab uses, and a small API for finding, loading and merging them.
 They also cover its <strong>HLA tools</strong>, for working with HLA typing from HLA-HD and
-HIBAG.</p>
+HIBAG, and <strong>fine-mapping</strong> of GWAS loci with SuSiE.</p>
 <div class="admonition note">
 <p class="admonition-title">Example data</p>
 <p>Every example on these pages uses a made-up cohort called <code>demo</code>, with
@@ -943,6 +998,10 @@ unlinked samples are reported rather than skipped.</p>
 <td><a href="hla/">HLA calls</a></td>
 </tr>
 <tr>
+<td>Fine-map GWAS loci (credible sets, PIPs)</td>
+<td><a href="finemap/">Fine-mapping</a></td>
+</tr>
+<tr>
 <td>See every function and argument</td>
 <td><a href="reference/cohort/">API reference</a></td>
 </tr>
@@ -955,7 +1014,8 @@ every Python package it uses:</p>
 </code></pre></div>
 <p>Add <code>".[dev]"</code> instead of <code>.</code> to also get pytest. Extracting variants and the
 survival/PRS commands also need <strong>bcftools</strong> on your PATH (on C4:
-<code>module load bcftools</code>).</p>
+<code>module load bcftools</code>). Fine-mapping needs <strong>plink2</strong> and <strong>R</strong> with the
+susieR package (<code>module load plink2 r</code>).</p>
 <p>Then check that the catalog matches what is on disk:</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"from c4.cohort import cohort; cohort('demo').check()"</span>
 </code></pre></div>

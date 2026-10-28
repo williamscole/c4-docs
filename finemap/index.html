@@ -1,0 +1,1476 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Data loading and analysis tools for the C4 cluster">
+      
+      
+      
+        <link rel="canonical" href="https://williamscole.github.io/c4-docs/finemap/">
+      
+      
+        <link rel="prev" href="../hla/">
+      
+      
+        <link rel="next" href="../cli/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Fine-mapping - c4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fine-mapping" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="c4" class="md-header__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            c4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fine-mapping
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="c4" class="md-nav__button md-logo" aria-label="c4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    c4
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data loading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data loading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loading and merging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/ids/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How IDs link
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/dosages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extracting variants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The data catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../r/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HLA calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-build-an-ld-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Build an LD panel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-define-the-loci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Define the loci
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-susie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Run SuSiE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-as-a-slurm-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it as a Slurm job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/cohort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.cohort
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/genotypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.genotypes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hla/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.finemap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-build-an-ld-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Build an LD panel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-define-the-loci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Define the loci
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-susie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Run SuSiE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-as-a-slurm-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it as a Slurm job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fine-mapping">Fine-mapping<a class="headerlink" href="#fine-mapping" title="Permanent link">&para;</a></h1>
+<p><code>c4 finemap</code> fine-maps GWAS loci with
+<a href="https://stephenslab.github.io/susieR/">SuSiE-RSS</a>. For each locus it reports
+credible sets (small groups of variants that very likely contain a causal
+variant) and each variant's posterior inclusion probability (PIP).</p>
+<p>It takes three steps:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>c4 finemap setup</code></td>
+<td>Builds an LD reference panel from a cohort's genotypes, or from 1000 Genomes</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>c4 finemap loci</code></td>
+<td>Turns GWAS hits into regions to fine-map</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>c4 finemap run</code></td>
+<td>Matches each region's GWAS variants to the panel and runs SuSiE</td>
+</tr>
+</tbody>
+</table>
+<p>You need <strong>plink2</strong> for step 1, and <strong>R with susieR</strong> for step 3. On C4:</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>plink2<span class="w"> </span>r
+</code></pre></div>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. A panel from the cohort the GWAS was run on (chr6 only)</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> </span>--dna<span class="w"> </span>demo.imputed<span class="w"> </span>--panel-name<span class="w"> </span>demo<span class="w"> </span>--chr<span class="w"> </span><span class="m">6</span><span class="w"> </span>--maf<span class="w"> </span><span class="m">0</span>.001
+
+<span class="c1"># 2. ±500 kb around every p &lt; 5e-8 variant</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
+
+<span class="c1"># 3. SuSiE on each locus</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--loci<span class="w"> </span>loci.tsv<span class="w"> </span>--panel<span class="w"> </span>demo<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
+</code></pre></div>
+<p>Then look at <code>fm/pheno.cs.tsv</code> for the credible sets, and at
+<code>fm/pheno.summary.tsv</code> to check that every locus ran cleanly.</p>
+<h2 id="1-build-an-ld-panel">1. Build an LD panel<a class="headerlink" href="#1-build-an-ld-panel" title="Permanent link">&para;</a></h2>
+<p>SuSiE needs the correlation (LD) between the variants in each locus. It gets
+it from a <strong>panel</strong>: a set of genotypes that <code>setup</code> converts to plink2 files.</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>avail
+</code></pre></div>
+<p><code>avail</code> lists every genetic data set in the <a href="../data/catalog/">data catalog</a>,
+named <code>&lt;cohort&gt;.&lt;entry&gt;</code>, plus any panels you have already built:</p>
+<div class="highlight"><pre><span></span><code>Genetic data in the catalog (use the first column as --dna):
+
+          dna      kind format build chroms status source
+ demo.imputed    cohort    vcf   b38   1-22  22/22 ✓
+  demo.exome     cohort      -     -      -  not set
+      kgp.b38 reference    vcf   b38   1-22  22/22 ✓ https://ftp.1000genomes.ebi.ac.uk/...
+      kgp.b37 reference    vcf   b37   1-22  22/22 ✓ https://ftp.1000genomes.ebi.ac.uk/...
+</code></pre></div>
+<p>Then build a panel from one of them:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># The GWAS cohort's own genotypes (best, if the GWAS was run on them)</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> </span>--dna<span class="w"> </span>demo.imputed<span class="w"> </span>--panel-name<span class="w"> </span>demo<span class="w"> </span>--chr<span class="w"> </span><span class="m">6</span>
+
+<span class="c1"># 1000 Genomes, European samples only</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> </span>--dna<span class="w"> </span>kgp.b38<span class="w"> </span>--panel-name<span class="w"> </span>kgp_eur<span class="w"> </span>--pops<span class="w"> </span>EUR<span class="w"> </span>--chr<span class="w"> </span><span class="m">6</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Use the GWAS cohort itself when you can</p>
+<p>SuSiE-RSS is sensitive to differences between the panel's LD and the LD
+in the GWAS samples. If you have the genotypes the GWAS was run on, a panel
+built from them (<strong>in-sample LD</strong>) is much more reliable than 1000 Genomes.</p>
+</div>
+<p><strong>Where it goes.</strong> Panels are written to <code>$TMPDIR/&lt;panel-name&gt;/</code>, one set of
+plink2 files per chromosome (<code>chr6.pgen/.pvar/.psam</code>), plus <code>samples.keep</code>
+and <code>settings.json</code>. On Slurm, <code>$TMPDIR</code> is deleted when the job ends, so
+build the panel in the same job that uses it (see
+<a href="#running-it-as-a-slurm-job">Running it as a Slurm job</a>). Use <code>--dir</code> to put
+it somewhere else.</p>
+<p><strong>Samples.</strong> The panel uses the cohort's samples for that data set from its
+<a href="../data/ids/">ID map</a>, minus patients marked <code>drop=1</code>. You can narrow that:</p>
+<ul>
+<li><code>--keep file.txt</code> keeps only those samples (plink format: <code>IID</code>, or <code>FID IID</code>).</li>
+<li><code>--pops EUR</code> (or <code>--pops GBR,CEU</code>) keeps populations or super-populations,
+  for reference panels such as 1000 Genomes.</li>
+</ul>
+<p>For 1000 Genomes, <code>kgp.b38</code> (30x high coverage) and <code>kgp.b37</code> (phase 3) both
+give the same 2,504 unrelated samples. The b38 VCFs' 698 extra samples, mostly
+relatives, are marked <code>drop=1</code>.</p>
+<p><strong>Variants.</strong> Variant IDs are <code>CHROM:POS:REF:ALT</code>. Imputed dosages (<code>DS</code>) are
+kept when the VCF has them, and LD is then computed from dosages rather than
+hard calls. Optional filters: <code>--maf</code>, <code>--mac</code>, <code>--geno</code>, <code>--hwe</code>, and
+<code>--plink-args "..."</code> for anything else plink2 takes. Records with more than two
+alleles are dropped (imputed VCFs are already split), as are repeated records
+of the same variant.</p>
+<p><strong>Running again.</strong> Running <code>setup</code> again with the same <code>--panel-name</code> adds
+chromosomes. If the panel was built with different settings, or a chromosome
+you asked for is already there, you're asked before anything is overwritten.
+<code>--force</code> skips the question, and batch jobs need it.</p>
+<h2 id="2-define-the-loci">2. Define the loci<a class="headerlink" href="#2-define-the-loci" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
+</code></pre></div>
+<p>Every variant with p &lt; <code>--p</code> (default <code>5e-8</code>) gets a window of <code>--window</code>
+(default 500 kb) on each side. Overlapping windows are merged into one locus.</p>
+<ul>
+<li><strong><code>--p</code> only decides where the loci are.</strong> Every variant inside a locus is
+  fine-mapped, whatever its p-value. SuSiE needs the non-significant variants
+  to model the LD.</li>
+<li><strong>Windows are merged by distance, not by LD.</strong> Two nearby signals end up in
+  one locus, and SuSiE separates them. This is different from clumping, which
+  would split them.</li>
+<li><strong>Locus IDs are coordinates</strong>, such as <code>6:31500000-32500000</code>, so they stay
+  the same between runs and when you add traits.</li>
+<li><strong>The MHC is one locus.</strong> With <code>--build</code>, any window that touches the
+  extended MHC (b37 chr6:28,477,797-33,448,354; b38 chr6:28,510,120-33,480,577)
+  is merged into a single MHC locus, marked <code>is_mhc</code>. SuSiE results there are
+  hard to interpret because of the MHC's extreme LD; <code>--skip-mhc</code> leaves it out.</li>
+<li><strong>Wide loci are flagged, not split.</strong> Loci wider than <code>--max-width</code> (3 Mb)
+  are marked <code>exceeds_max_width</code>.</li>
+</ul>
+<p><strong>Several traits.</strong> Give several GWAS files and the loci are pooled across
+them. A locus doesn't depend on which trait found it, which is what
+colocalization needs later.</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>trait1.tsv<span class="w"> </span>trait2.tsv<span class="w"> </span>--trait<span class="w"> </span>T1<span class="w"> </span>--trait<span class="w"> </span>T2<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
+</code></pre></div>
+<p>Trait names come from the plink2 phenotype in the file name, or from <code>--trait</code>.
+For a single file holding several traits, use <code>--trait-col</code>.</p>
+<p><code>loci.tsv</code> has one row per locus:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locus_id</code>, <code>chrom</code>, <code>start</code>, <code>end</code>, <code>width</code></td>
+<td>The region</td>
+</tr>
+<tr>
+<td><code>lead_id</code>, <code>lead_p</code>, <code>lead_trait</code></td>
+<td>Most significant variant in the region, across traits</td>
+</tr>
+<tr>
+<td><code>n_sig</code></td>
+<td>Number of distinct variants with p &lt; <code>--p</code></td>
+</tr>
+<tr>
+<td><code>traits</code>, <code>trait_min_p</code></td>
+<td>Each trait with a hit, and its minimum p</td>
+</tr>
+<tr>
+<td><code>is_mhc</code>, <code>exceeds_max_width</code></td>
+<td>Flags</td>
+</tr>
+</tbody>
+</table>
+<p>You can edit this file, or write your own with <code>chrom</code>, <code>start</code> and <code>end</code>
+columns, to fine-map other regions.</p>
+<h2 id="3-run-susie">3. Run SuSiE<a class="headerlink" href="#3-run-susie" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--loci<span class="w"> </span>loci.tsv<span class="w"> </span>--panel<span class="w"> </span>demo<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
+</code></pre></div>
+<p>For each locus, <code>run</code>:</p>
+<ol>
+<li>Takes every GWAS variant in the region.</li>
+<li>Matches it to a panel variant on position and alleles. An exact REF/ALT
+   match is preferred; a swapped match is accepted when it's the only one.
+   Preferring exact matches matters for indels: an insertion and a deletion at
+   the same position, such as <code>C/CA</code> and <code>CA/C</code>, have the same two alleles.</li>
+<li>Orients z to the panel's ALT allele, so z and LD use the same allele.</li>
+<li>Computes LD from the panel's dosages.</li>
+<li>Runs <code>susie_rss</code> in R, along with two checks that the z-scores fit the LD
+   (see <a href="#checking-the-results">Checking the results</a>).</li>
+</ol>
+<p>If one locus fails or is skipped, the others still run; <code>summary.tsv</code> says
+what happened to each one.</p>
+<p><strong><code>--build</code> must match the panel.</strong> The run stops if the GWAS build and the
+panel's build (from its <code>settings.json</code>) differ.</p>
+<p><strong>Where z, N and the effect allele come from.</strong> z is read from <code>Z_STAT</code>, <code>Z</code>
+or <code>T_STAT</code>, else computed as <code>BETA/SE</code>, else <code>log(OR)/SE</code>. The effect allele
+is <code>A1</code>, <code>EFFECT_ALLELE</code> or <code>ALLELE1</code>, else <code>ALT</code>. The sample size is the
+median <code>OBS_CT</code> or <code>N</code> of the locus's variants, unless you give <code>--n</code>. The
+<code>--*-col</code> options override any of these. plink2 <code>.glm</code> files work as they are.</p>
+<p><strong><code>--in-sample</code>.</strong> Use it when the GWAS was run on the panel's own genotypes.
+It's refused for reference panels such as 1000 Genomes. With it:</p>
+<ul>
+<li>SuSiE estimates the residual variance, as susieR recommends for in-sample
+  LD. <code>--fixed-residual-variance</code> turns that off.</li>
+<li><code>--drop-ambiguous</code> is refused, because the strand can't differ between
+  the GWAS and the panel.</li>
+<li>A locus whose GWAS N differs from the panel's sample count by more than 5%,
+  or that has kriging flags, gets a note in <code>summary.tsv</code>. With true in-sample
+  LD neither should happen.</li>
+</ul>
+<p><strong>Other options.</strong> <code>--locus ID</code> runs only that locus, and can be repeated.
+<code>--L</code> is the maximum number of signals per locus (default 10). <code>--coverage</code>
+(default 0.95) and <code>--min-abs-corr</code> (default 0.5, the purity cut-off) control
+credible sets. <code>--max-variants</code> (default 20,000) skips very large loci.</p>
+<h2 id="output-files">Output files<a class="headerlink" href="#output-files" title="Permanent link">&para;</a></h2>
+<p>All files start with the <code>-o</code> prefix.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>One row per</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.cs.tsv</code></td>
+<td>Credible set: size, coverage, purity, log10 Bayes factor, lead variant by PIP, lead variant and minimum p by GWAS p</td>
+</tr>
+<tr>
+<td><code>.cs_members.tsv</code></td>
+<td>Credible set member, with its full GWAS row, PIP and alpha</td>
+</tr>
+<tr>
+<td><code>.pip.tsv</code></td>
+<td>Fine-mapped variant: z, p, PIP, credible set, kriging diagnostics, strand-ambiguity flag</td>
+</tr>
+<tr>
+<td><code>.summary.tsv</code></td>
+<td>Locus: status, variant counts, drop reasons, N used, LD source, <code>s</code>, number of credible sets, notes</td>
+</tr>
+<tr>
+<td><code>.dropped.tsv</code></td>
+<td>GWAS variant in a locus that wasn't fine-mapped, with <code>DROP_REASON</code></td>
+</tr>
+<tr>
+<td><code>.run.json</code></td>
+<td>The run: inputs, panel settings, parameters, susieR version</td>
+</tr>
+</tbody>
+</table>
+<p>Credible set IDs are <code>&lt;locus_id&gt;:L&lt;k&gt;</code>, for example <code>6:31500000-32500000:L1</code>.</p>
+<p><strong>Reading <code>cs.tsv</code>.</strong></p>
+<ul>
+<li><strong>Purity</strong> (<code>min_abs_corr</code>, <code>mean_abs_corr</code>) is the LD between the set's
+  members. Sets below <code>--min-abs-corr</code> are already removed. A pure set means
+  its variants are hard to tell apart, not that the signal is weak.</li>
+<li><strong>Two leads.</strong> <code>lead_pip_variant</code> is SuSiE's best guess at the causal
+  variant. <code>lead_p_variant</code> and <code>min_p</code> are the most significant GWAS variant
+  in the set. They often differ, and both are useful.</li>
+<li><strong>Full GWAS rows.</strong> <code>cs_members.tsv</code> has the full GWAS row for every member,
+  so you don't have to look members up again.</li>
+</ul>
+<h2 id="checking-the-results">Checking the results<a class="headerlink" href="#checking-the-results" title="Permanent link">&para;</a></h2>
+<p>Check <code>summary.tsv</code> before trusting a locus's credible sets.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>What to look for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td><code>ok</code>, or why the locus was skipped or failed</td>
+</tr>
+<tr>
+<td><code>n_gwas</code>, <code>n_matched</code>, <code>n_variants</code></td>
+<td>GWAS variants in the region, matched to the panel, and fine-mapped. A large gap means much of the locus is missing from the panel</td>
+</tr>
+<tr>
+<td><code>dropped</code></td>
+<td>Counts by reason (see below)</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>From <code>estimate_s_rss</code>: how inconsistent the z-scores and LD are. Near 0 is good; above about 0.1–0.2, read the locus with caution</td>
+</tr>
+<tr>
+<td><code>n_kriging_flagged</code></td>
+<td>Variants whose z doesn't fit the LD (see below)</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>In-sample warnings: N mismatch, kriging flags</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kriging flags.</strong> <code>kriging_rss</code> predicts each variant's z-score from its
+neighbours' z-scores and the panel LD. A variant is flagged (<code>kriging_flag</code> in
+<code>pip.tsv</code>) when its observed z fits much better with its alleles flipped
+(<code>logLR &gt; 2</code>) and it has a real signal (<code>|z| &gt; 2</code>). Common causes:</p>
+<ul>
+<li><strong>One or two flagged variants with a strong z:</strong> an allele flip in the
+  sumstats, a strand-ambiguous SNP (check <code>ambiguous_strand</code>), or a badly
+  imputed variant.</li>
+<li><strong>Many flagged variants across the locus:</strong> the panel doesn't match the
+  GWAS samples, for example a different ancestry. Use in-sample LD if you can.</li>
+</ul>
+<p><strong>Why variants are dropped</strong> (<code>DROP_REASON</code> in <code>dropped.tsv</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>not_in_panel</code></td>
+<td>No panel variant at that position</td>
+</tr>
+<tr>
+<td><code>allele_mismatch</code></td>
+<td>A panel variant at that position, but with different alleles</td>
+</tr>
+<tr>
+<td><code>ambiguous</code></td>
+<td>Matches more than one panel variant, and the alleles can't decide which. With REF/ALT given this is rare; with only <code>A1</code> it happens at multi-allelic sites</td>
+</tr>
+<tr>
+<td><code>duplicate_in_gwas</code></td>
+<td>Another GWAS row matched the same panel variant; the more significant one is kept</td>
+</tr>
+<tr>
+<td><code>missing_p</code>, <code>missing_pos</code>, <code>missing_z</code></td>
+<td>Missing or unreadable values</td>
+</tr>
+<tr>
+<td><code>effect_allele_mismatch</code></td>
+<td>The effect allele is neither panel allele</td>
+</tr>
+<tr>
+<td><code>monomorphic_in_panel</code></td>
+<td>No variation among the panel's samples, so it has no LD</td>
+</tr>
+<tr>
+<td><code>strand_ambiguous</code></td>
+<td>A/T or C/G SNP, dropped because of <code>--drop-ambiguous</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="running-it-as-a-slurm-job">Running it as a Slurm job<a class="headerlink" href="#running-it-as-a-slurm-job" title="Permanent link">&para;</a></h2>
+<p>Because the panel lives in <code>$TMPDIR</code>, build it and use it in the same job:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=finemap</span>
+<span class="c1">#SBATCH --cpus-per-task=4</span>
+<span class="c1">#SBATCH --mem=32G</span>
+<span class="c1">#SBATCH --time=12:00:00</span>
+
+module<span class="w"> </span>load<span class="w"> </span>plink2<span class="w"> </span>r
+
+c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> </span>--dna<span class="w"> </span>demo.imputed<span class="w"> </span>--panel-name<span class="w"> </span>demo<span class="w"> </span>--force
+c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
+c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--loci<span class="w"> </span>loci.tsv<span class="w"> </span>--panel<span class="w"> </span>demo<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
+</code></pre></div>
+<p>To save time, build only the chromosomes your loci are on, e.g. <code>--chr 6,19</code>.</p>
+<h2 id="from-python">From Python<a class="headerlink" href="#from-python" title="Permanent link">&para;</a></h2>
+<p>The same steps are available as functions; see the
+<a href="../reference/finemap/">API reference</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.finemap</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_panel</span><span class="p">,</span> <span class="n">find_loci</span><span class="p">,</span> <span class="n">run_finemap</span>
+
+<span class="n">setup_panel</span><span class="p">(</span><span class="s2">"demo.imputed"</span><span class="p">,</span> <span class="s2">"demo"</span><span class="p">,</span> <span class="n">chrom</span><span class="o">=</span><span class="s2">"6"</span><span class="p">)</span>
+<span class="n">loci</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_loci</span><span class="p">([</span><span class="s2">"results.PHENO.glm.linear"</span><span class="p">],</span> <span class="s2">"loci.tsv"</span><span class="p">,</span> <span class="n">build</span><span class="o">=</span><span class="s2">"b38"</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_finemap</span><span class="p">(</span><span class="s2">"results.PHENO.glm.linear"</span><span class="p">,</span> <span class="s2">"loci.tsv"</span><span class="p">,</span> <span class="s2">"demo"</span><span class="p">,</span> <span class="s2">"b38"</span><span class="p">,</span> <span class="s2">"fm/pheno"</span><span class="p">,</span>
+                     <span class="n">in_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">result</span><span class="p">[</span><span class="s2">"cs"</span><span class="p">]</span>          <span class="c1"># the credible sets, as a DataFrame</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../hla/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HLA calls">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                HLA calls
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cli/" class="md-footer__link md-footer__link--next" aria-label="Next: Command line">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Command line
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "toc.follow", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

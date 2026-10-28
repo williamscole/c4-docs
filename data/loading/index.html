@@ -690,6 +690,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -730,10 +757,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -751,8 +778,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -833,6 +860,34 @@
     
   
     c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.finemap
   
 
     
@@ -1221,6 +1276,12 @@ which makes per-chromosome loops easy:</p>
 IDs for <code>dna.imputed</code>). To connect them to patients, use the ID map:</p>
 <div class="highlight"><pre><span></span><code><span class="n">ids</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">id_map</span><span class="p">()</span>                                  <span class="c1"># the full table</span>
 <span class="n">to_patient</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ids</span><span class="p">[</span><span class="s2">"imputed_id"</span><span class="p">],</span> <span class="n">ids</span><span class="p">[</span><span class="s2">"patient_id"</span><span class="p">]))</span>
+</code></pre></div>
+<p><code>.samples()</code> gives the sample names to keep, leaving out patients marked
+<code>drop=1</code>. Write them to a file to subset a VCF:</p>
+<div class="highlight"><pre><span></span><code><span class="n">samples</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">samples</span><span class="p">(</span><span class="s2">"imputed"</span><span class="p">)</span>                    <span class="c1"># ["ARR-0001", "ARR-0002", ...]</span>
+<span class="n">Path</span><span class="p">(</span><span class="s2">"keep.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># bcftools view -S keep.txt chr6.dose.vcf.gz</span>
 </code></pre></div>
 <p>To pull a few variants out of the VCFs as a table, with <code>patient_id</code>
 attached, see <a href="../dosages/">Extracting variants</a>.</p>

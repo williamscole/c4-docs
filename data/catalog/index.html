@@ -590,6 +590,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reference-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference panels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#survival-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -706,6 +717,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -746,10 +784,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -767,8 +805,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -849,6 +887,34 @@
     
   
     c4.hla
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.finemap
   
 
     
@@ -1016,6 +1082,17 @@
     <span class="md-ellipsis">
       
         Shared resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference panels
       
     </span>
   </a>
@@ -1217,6 +1294,11 @@ is a table, used through <code>.load()</code>.</p>
 <td>Shown in the table, e.g. <code>vcf</code>, <code>b38</code>.</td>
 </tr>
 <tr>
+<td><code>id</code></td>
+<td>genetic data</td>
+<td><code>{type: ...}</code>: which ID map column holds the files' sample names. Defaults to the entry's key (<code>dna.imputed</code> → <code>imputed_id</code>); <code>type: patient</code> means the files use <code>patient_id</code> itself.</td>
+</tr>
+<tr>
 <td><code>imputed_from</code></td>
 <td>genetic data</td>
 <td>The data type an imputed set was made from; <code>.check()</code> confirms the IDs match.</td>
@@ -1282,6 +1364,23 @@ hg19→hg38 chain without a <code>--chain-file</code>. <code>liftover_chains()</
 
 <span class="n">liftover_chains</span><span class="p">()</span>   <span class="c1"># {("b37", "b38"): .../hg19ToHg38.over.chain, ...}</span>
 </code></pre></div>
+<h2 id="reference-panels">Reference panels<a class="headerlink" href="#reference-panels" title="Permanent link">&para;</a></h2>
+<p>A panel with no patients of our own, like 1000 Genomes, is a cohort block with
+<code>kind: reference</code>. It loads like any other cohort, and
+<code>list_cohorts(kind="cohort")</code> leaves it out:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">c4.cohort</span><span class="w"> </span><span class="kn">import</span> <span class="n">cohort</span>
+
+<span class="n">kgp</span> <span class="o">=</span> <span class="n">cohort</span><span class="p">(</span><span class="s2">"1000g"</span><span class="p">)</span>
+<span class="n">kgp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"pheno"</span><span class="p">)</span>                       <span class="c1"># sample, pop, super_pop, gender</span>
+<span class="n">kgp</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">"dna"</span><span class="p">,</span> <span class="n">chrom</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>                <span class="c1"># b38 (30x high coverage) by default</span>
+<span class="n">kgp</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">"dna.b37"</span><span class="p">,</span> <span class="n">chrom</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>            <span class="c1"># phase 3</span>
+<span class="n">kgp</span><span class="o">.</span><span class="n">samples</span><span class="p">(</span><span class="s2">"b38"</span><span class="p">)</span>                      <span class="c1"># the 2,504 unrelated samples</span>
+</code></pre></div>
+<p>Its sample names are the same in every file, so the ID map has just
+<code>patient_id</code>, <code>qc_note</code> and <code>drop</code>, and each <code>dna:</code> entry sets
+<code>id: {type: patient}</code>. The b38 VCFs hold 3,202 samples. The 698 that aren't in
+phase 3 (mostly relatives) are marked <code>drop=1</code>, so both builds cover the same
+2,504 people. <code>.path()</code> returns the whole VCF, so subset it with <code>.samples()</code>.</p>
 <h2 id="survival-settings">Survival settings<a class="headerlink" href="#survival-settings" title="Permanent link">&para;</a></h2>
 <p>A cohort's <code>survival:</code> block makes it available to <code>c4 survival --dataset</code> and
 <code>c4 prs --dataset</code>, and to <code>Survival.from_cohort()</code> in Python:</p>

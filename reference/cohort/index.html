@@ -519,6 +519,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -561,10 +588,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -582,8 +609,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -738,6 +765,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.sample_id_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sample_id_type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.samples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        samples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#c4.cohort.Cohort.load" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -884,6 +933,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finemap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.finemap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -989,6 +1066,28 @@
     <span class="md-ellipsis">
       
         dropped_patients
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.sample_id_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sample_id_type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4.cohort.Cohort.samples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        samples
       
     </span>
   </a>
@@ -1267,6 +1366,45 @@ therefore always a join on patient_id.</p>
 <div class="doc doc-object doc-function">
 
 
+<h3 id="c4.cohort.Cohort.sample_id_type" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">sample_id_type</span><span class="p">(</span><span class="n">dna</span><span class="p">)</span></code>
+
+<a href="#c4.cohort.Cohort.sample_id_type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>ID type of the sample names in a <code>dna:</code> entry: its <code>id: {type: ...}</code>
+if set, otherwise the entry's key (<code>dna.imputed</code> -&gt; imputed_id).</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="c4.cohort.Cohort.samples" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">samples</span><span class="p">(</span><span class="n">dna</span><span class="p">,</span> <span class="n">keep_dropped</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#c4.cohort.Cohort.samples" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sample names of a <code>dna:</code> entry's patients, as they appear in its files,
+leaving out patients marked drop=1 unless <code>keep_dropped</code>. Use it to
+subset a VCF, e.g. <code>bcftools view -S</code>.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="c4.cohort.Cohort.load" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">load</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">qc_note</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_dropped</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></code>
 
@@ -1531,12 +1669,14 @@ $C4_CATALOG, then the catalog.yaml shipped with the package.</p>
 
 
 <h2 id="c4.cohort.list_cohorts" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">list_cohorts</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">list_cohorts</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#c4.cohort.list_cohorts" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
+
+        <p>Cohort names in the catalog, optionally only those of one <code>kind:</code> (cohort or reference).</p>
 
 
     </div>
