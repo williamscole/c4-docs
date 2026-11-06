@@ -645,6 +645,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#plotting-a-locus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting a locus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#running-it-as-a-slurm-job" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -865,6 +876,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/survival/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.survival
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -965,6 +1004,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#plotting-a-locus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting a locus
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#running-it-as-a-slurm-job" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1033,6 +1083,11 @@ variant) and each variant's posterior inclusion probability (PIP).</p>
 <td><code>c4 finemap run</code></td>
 <td>Matches each region's GWAS variants to the panel and runs SuSiE</td>
 </tr>
+<tr>
+<td>4</td>
+<td><code>c4 finemap visualize</code></td>
+<td>Plots each locus: p-values, PIPs and genes</td>
+</tr>
 </tbody>
 </table>
 <p>You need <strong>plink2</strong> for step 1, and <strong>R with susieR</strong> for step 3. On C4:</p>
@@ -1050,7 +1105,10 @@ c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </s
 <span class="w">    </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
 </code></pre></div>
 <p>Then look at <code>fm/pheno.cs.tsv</code> for the credible sets, and at
-<code>fm/pheno.summary.tsv</code> to check that every locus ran cleanly.</p>
+<code>fm/pheno.summary.tsv</code> to check that every locus ran cleanly. To plot every
+locus that has a credible set:</p>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>visualize<span class="w"> </span>fm/pheno<span class="w"> </span>-o<span class="w"> </span>plots/
+</code></pre></div>
 <h2 id="1-build-an-ld-panel">1. Build an LD panel<a class="headerlink" href="#1-build-an-ld-panel" title="Permanent link">&para;</a></h2>
 <p>SuSiE needs the correlation (LD) between the variants in each locus. It gets
 it from a <strong>panel</strong>: a set of genotypes that <code>setup</code> converts to plink2 files.</p>
@@ -1184,6 +1242,11 @@ columns, to fine-map other regions.</p>
 </ol>
 <p>If one locus fails or is skipped, the others still run; <code>summary.tsv</code> says
 what happened to each one.</p>
+<p><strong>Use unfiltered summary statistics.</strong> SuSiE needs every variant in a locus,
+including the null ones, to model the LD. Sumstats cut down to significant
+or suggestive hits make PIPs and credible sets overconfident. <code>run</code> warns
+when the GWAS's largest p-value is below 0.1, and notes any locus whose
+variants all have p &lt; 1e-3.</p>
 <p><strong><code>--build</code> must match the panel.</strong> The run stops if the GWAS build and the
 panel's build (from its <code>settings.json</code>) differ.</p>
 <p><strong>Where z, N and the effect allele come from.</strong> z is read from <code>Z_STAT</code>, <code>Z</code>
@@ -1226,7 +1289,7 @@ credible sets. <code>--max-variants</code> (default 20,000) skips very large loc
 </tr>
 <tr>
 <td><code>.pip.tsv</code></td>
-<td>Fine-mapped variant: z, p, PIP, credible set, kriging diagnostics, strand-ambiguity flag</td>
+<td>Fine-mapped variant: z, p, PIP, credible set, r² with the top variant and with the nearest credible-set lead, kriging diagnostics, strand-ambiguity flag</td>
 </tr>
 <tr>
 <td><code>.summary.tsv</code></td>
@@ -1286,7 +1349,7 @@ credible sets. <code>--max-variants</code> (default 20,000) skips very large loc
 </tr>
 <tr>
 <td><code>notes</code></td>
-<td>In-sample warnings: N mismatch, kriging flags</td>
+<td>Warnings: every variant has p &lt; 1e-3 (the GWAS looks filtered by p-value); with <code>--in-sample</code>, an N mismatch or kriging flags</td>
 </tr>
 </tbody>
 </table>
@@ -1344,6 +1407,38 @@ neighbours' z-scores and the panel LD. A variant is flagged (<code>kriging_flag<
 </tr>
 </tbody>
 </table>
+<h2 id="plotting-a-locus">Plotting a locus<a class="headerlink" href="#plotting-a-locus" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>c4<span class="w"> </span>finemap<span class="w"> </span>visualize<span class="w"> </span>fm/pheno<span class="w"> </span>-o<span class="w"> </span>plots/<span class="w">                       </span><span class="c1"># every locus with a credible set</span>
+c4<span class="w"> </span>finemap<span class="w"> </span>visualize<span class="w"> </span>fm/pheno<span class="w"> </span>-o<span class="w"> </span>plots/<span class="w"> </span>--locus<span class="w"> </span><span class="m">6</span>:31500000-32500000<span class="w"> </span>--format<span class="w"> </span>pdf
+</code></pre></div>
+<p>Each plot has three panels sharing the x-axis:</p>
+<ul>
+<li><strong>−log₁₀(p)</strong>, a local Manhattan plot, with the genome-wide significance
+  line.</li>
+<li><strong>PIP</strong>, SuSiE's posterior inclusion probability.</li>
+<li><strong>Genes</strong>, protein-coding genes from the catalog's Ensembl GTF for the run's
+  build (<code>--all-biotypes</code> for every gene, <code>--gtf</code> for another file,
+  <code>--no-genes</code> to leave the track out).</li>
+</ul>
+<p>In both data panels:</p>
+<ul>
+<li><strong>Colour</strong> is r² with the nearest credible-set lead, in the usual LocusZoom
+  bins. Each signal gets its own red cloud around its own lead. <code>--color-by
+  top</code> uses r² with the single top-PIP variant instead.</li>
+<li><strong>Shape:</strong> credible-set members get one marker per set (triangle for L1,
+  square for L2, …). Each set's lead (top PIP) is a purple diamond, labelled
+  with its ID.</li>
+<li><strong>Black ring:</strong> the variant is kriging-flagged (see
+  <a href="#checking-the-results">Checking the results</a>).</li>
+</ul>
+<p>The title gives the number of variants, N, the number of credible sets, <code>s</code>,
+any kriging flags, and whether the LD was in-sample. The MHC is shaded on
+chr6.</p>
+<p>The x-axis spans the locus's fine-mapped variants plus a small margin;
+<code>--full-locus</code> shows the whole locus window instead.</p>
+<p>Plots are drawn from the run's output files, so the LD panel doesn't need to
+exist any more: you can make them after the Slurm job has finished, or on
+another machine. <code>--all</code> also plots loci without a credible set.</p>
 <h2 id="running-it-as-a-slurm-job">Running it as a Slurm job<a class="headerlink" href="#running-it-as-a-slurm-job" title="Permanent link">&para;</a></h2>
 <p>Because the panel lives in <code>$TMPDIR</code>, build it and use it in the same job:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
@@ -1358,6 +1453,7 @@ c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> <
 c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
 c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--loci<span class="w"> </span>loci.tsv<span class="w"> </span>--panel<span class="w"> </span>demo<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
+c4<span class="w"> </span>finemap<span class="w"> </span>visualize<span class="w"> </span>fm/pheno<span class="w"> </span>-o<span class="w"> </span>plots/
 </code></pre></div>
 <p>To save time, build only the chromosomes your loci are on, e.g. <code>--chr 6,19</code>.</p>
 <h2 id="from-python">From Python<a class="headerlink" href="#from-python" title="Permanent link">&para;</a></h2>

@@ -794,6 +794,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        visualize
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1064,6 +1075,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/survival/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c4.survival
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1286,6 +1325,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        visualize
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1445,6 +1495,10 @@ that same help text.</p>
 <td>SuSiE-RSS on each locus, with LD from a <code>finemap setup</code> panel</td>
 </tr>
 <tr>
+<td><code>finemap visualize</code></td>
+<td>Plot fine-mapped loci: p-values, PIPs and genes</td>
+</tr>
+<tr>
 <td><code>concordance</code></td>
 <td>Genotype concordance between samples in two VCF/PLINK files</td>
 </tr>
@@ -1509,6 +1563,8 @@ c4<span class="w"> </span>prs<span class="w"> </span>--dataset<span class="w"> <
 <li><code>prs</code> writes <code>prs.log</code>, <code>individual_prs.tsv</code>, <code>prs_variants.tsv</code> and plots
   into its output directory. The weights file must have exactly three
   columns; anything else is an error naming the line.</li>
+<li>How the Cox models are set up (complete cases, PC standardisation, what
+  the HR is per): <a href="../reference/survival/#how-the-model-works"><code>c4.survival</code></a>.</li>
 </ul>
 <h2 id="clumping">Clumping<a class="headerlink" href="#clumping" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>c4<span class="w"> </span>clump<span class="w"> </span>results.PHENO.glm.logistic.hybrid<span class="w"> </span>panel.chr6.vcf.gz<span class="w"> </span>-o<span class="w"> </span>out/chr6<span class="w"> </span><span class="se">\</span>
@@ -1532,6 +1588,7 @@ c4<span class="w"> </span>prs<span class="w"> </span>--dataset<span class="w"> <
 c4<span class="w"> </span>finemap<span class="w"> </span>setup<span class="w"> </span>--dna<span class="w"> </span>demo.imputed<span class="w"> </span>--panel-name<span class="w"> </span>demo<span class="w"> </span>--chr<span class="w"> </span><span class="m">6</span><span class="w">  </span><span class="c1"># LD panel in $TMPDIR/demo/</span>
 c4<span class="w"> </span>finemap<span class="w"> </span>loci<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>-o<span class="w"> </span>loci.tsv
 c4<span class="w"> </span>finemap<span class="w"> </span>run<span class="w"> </span>results.PHENO.glm.linear<span class="w"> </span>--loci<span class="w"> </span>loci.tsv<span class="w"> </span>--panel<span class="w"> </span>demo<span class="w"> </span>--build<span class="w"> </span>b38<span class="w"> </span>--in-sample<span class="w"> </span>-o<span class="w"> </span>fm/pheno
+c4<span class="w"> </span>finemap<span class="w"> </span>visualize<span class="w"> </span>fm/pheno<span class="w"> </span>-o<span class="w"> </span>plots/<span class="w">                        </span><span class="c1"># one plot per locus with a credible set</span>
 </code></pre></div>
 <p>See <a href="../finemap/">Fine-mapping</a> for how each step works, the output files, and
 how to check the results.</p>
@@ -2003,6 +2060,7 @@ c4 dosages --dataset COHORT --variant-list snps.txt --variant-build b37 -o snps.
 <li><em>loci</em>: Define the loci to fine-map from one or more GWAS.</li>
 <li><em>run</em>: Fine-map loci with SuSiE-RSS, using GWAS z-scores and LD from a panel</li>
 <li><em>setup</em>: Build an LD reference panel from a cohort's genetic data in the catalog.</li>
+<li><em>visualize</em>: Plot fine-mapped loci: -log10(p), PIP and genes, one figure per locus.</li>
 </ul>
 <h4 id="avail">avail<a class="headerlink" href="#avail" title="Permanent link">&para;</a></h4>
 <p>List the genetic data sets that can be used as a panel (pass the name as
@@ -2484,6 +2542,103 @@ c4 finemap setup --dna demo.imputed --panel-name demo_eur --keep eur.txt --dir /
 <td><code>--verbose</code>, <code>-v</code></td>
 <td>boolean</td>
 <td>Also print each plink2 command as it runs</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>boolean</td>
+<td>Show this message and exit.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="visualize">visualize<a class="headerlink" href="#visualize" title="Permanent link">&para;</a></h4>
+<p>Plot fine-mapped loci: -log10(p), PIP and genes, one figure per locus.</p>
+<p>Points are coloured by r² with the nearest credible-set lead (LocusZoom
+colours; --color-by top uses the top-PIP variant instead). Credible-set
+members get one marker shape per set, leads are purple diamonds, and
+kriging-flagged variants have a black ring. The title line gives the
+number of variants, N, credible sets, s and the LD source.</p>
+<p>Uses only the run's outputs, so the LD panel doesn't need to exist any
+more. LD colours need a run made with this version of c4 (older runs plot
+in grey).</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>c4 finemap visualize fm/pheno -o plots/
+
+c4 finemap visualize fm/pheno -o plots/ --locus 6:31500000-32500000 --format pdf
+</code></pre></div>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>c4 finemap visualize [OPTIONS] PREFIX
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code>, <code>-o</code></td>
+<td>path</td>
+<td>Directory for the plots (one file per locus)</td>
+<td>_required</td>
+</tr>
+<tr>
+<td><code>--locus</code></td>
+<td>text</td>
+<td>Only this locus_id (repeat the option for several)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--all</code></td>
+<td>boolean</td>
+<td>Also plot loci without a credible set</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--full-locus</code></td>
+<td>boolean</td>
+<td>Show the whole locus window (default: just the span of its variants, plus a margin)</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--format</code></td>
+<td>text</td>
+<td>png, pdf or svg</td>
+<td><code>png</code></td>
+</tr>
+<tr>
+<td><code>--color-by</code></td>
+<td>text</td>
+<td>cs: r² with the nearest credible-set lead; top: r² with the top-PIP variant</td>
+<td><code>cs</code></td>
+</tr>
+<tr>
+<td><code>--genes</code> / <code>--no-genes</code></td>
+<td>boolean</td>
+<td>Draw the gene track</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>--gtf</code></td>
+<td>path</td>
+<td>GTF for the gene track (default: the catalog's GTF for the run's build)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>--all-biotypes</code></td>
+<td>boolean</td>
+<td>Show every gene, not only protein-coding ones</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>--verbose</code>, <code>-v</code></td>
+<td>boolean</td>
+<td>More progress output</td>
 <td><code>False</code></td>
 </tr>
 <tr>
